@@ -7,12 +7,19 @@ import Header from './components/common/Header'
 
 
 class Search extends Component {
+    static propTypes = {
+        messages: PropTypes.array.isRequired,
+    }
+
     state = {
         query: ''
     }
 
-    static propTypes = {
-        messages: PropTypes.array.isRequired,
+    handleChange = (event) => {
+        const newQuery = event.target.value
+        this.setState({
+            query: newQuery
+        })
     }
 
     getSearchMessages (messages) {
@@ -33,7 +40,7 @@ class Search extends Component {
         return (
         	<div className="Page">
 
-                <header className="header" style={{ 'background-color': '#fff' }}>
+                <header className="header" style={{ backgroundColor: '#fff' }}>
                     <div className="header__burger">
                         <Link to='/'>
                             <span
@@ -47,7 +54,12 @@ class Search extends Component {
                     </div>
 
                     <div className="header__search">
-                        <input type="text" placeholder="Search message" />
+                        <input
+                            type="text"
+                            value={this.state.query}
+                            placeholder="Search message"
+                            onChange={this.handleChange}
+                        />
                     </div>
                 </header>
 
