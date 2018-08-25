@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import './App.css';
 
+import Home from './Home'
+import Search from './Search'
 import CardList from './components/CardList'
 import * as MessagesApi from './libs/MessagesApi'
+import './styles/css/index.css';
 
 const COMPACT_MODE_CLASSNAME = 'compact'
 
@@ -53,6 +56,7 @@ class App extends Component {
   }
 
   activateCompactMode () {
+    console.log(this)
     this.setState({
       compactMode: true
     })
@@ -62,6 +66,7 @@ class App extends Component {
   }
 
   deactivateCompactMode () {
+    console.log(this)
     this.setState({
       compactMode: false
     })
@@ -71,53 +76,43 @@ class App extends Component {
   }
 
   render() {
+    const { messages, compactMode } = this.state
+
     return (
       <div className="App">
-        <Helmet>
-          <title>Turbo Todo</title>
-          <meta name="description" content="Todos on steroid!" />
-          <meta name="theme-color" content="#522e92" />
+          <Helmet>
+            <title>Messages</title>
+            <meta name="description" content="Todos on steroid!" />
+            <meta name="theme-color" content="#522e92" />
 
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-        </Helmet>
-
-        <header className="header">
-          <div className="header__wrapper">
-
-            <div className="header__burger">
-              <span className="icon icon-dehaze"></span>
-            </div>
-
-            <div className="header__logo">
-              Messages
-            </div>
-
-            <ul className="header__options" style={{float: 'right'}}>
-
-              <li className="header__item">
-                {this.isCompactModeActivated()
-                    ? (
-                      <button onClick={() => this.deactivateCompactMode()}>Disable compact</button>
-                    ) : (
-                      <button onClick={() => this.activateCompactMode()}>Activate compact</button>
-                    ) 
-                }
-              </li>
-
-              <li className="header__item">
-                <span className="header__search icon icon-search"></span>
-              </li>
-
-            </ul>
-
-          </div>
-        </header>
-
-        <div className="container">
-          <CardList messages={this.state.messages} />
-        </div>
-
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+          </Helmet>
+          {console.log(this)}
+          <Switch>
+              <Route
+                  path='/'
+                  exact
+                  render={() => (
+                      <Home
+                          messages={messages}
+                          isCompactMode={compactMode}
+                          onAddMessage={this.addMessage}
+                          activateCompactMode={this.activateCompactMode}
+                          deactivateCompactMode={this.deactivateCompactMode}
+                      />
+                  )}
+              ></Route>
+              <Route
+                  path='/search'
+                  exact
+                  render={() => (
+                      <Search
+                          messages={this.state.messages}
+                      />
+                  )}
+              ></Route>
+          </Switch>
       </div>
     );
   }

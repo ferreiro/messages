@@ -149,11 +149,16 @@ h1, h2, h3, p {
   padding: 0;
 }
 
+input {
+  outline: 0;
+  border: 0;
+}
+
 .header {
   top: 0;
   left: 0;
-  width: 100%;
-  padding: 20px 0;
+  padding: 0 1em;
+  width: calc(100% - 2em);
   background: #6040b0;
   text-align: left;
   position: fixed;
@@ -162,7 +167,7 @@ h1, h2, h3, p {
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.28);
 }
 .header__wrapper {
-  margin: 0 1em;
+  padding: 20px 0;
 }
 .header__burger {
   width: 18px;
@@ -172,12 +177,13 @@ h1, h2, h3, p {
   margin-left: 4px;
   position: relative;
 }
-.header__burger > span {
+.header__burger > span, .header__burger > a {
   top: 50%;
   color: #fff;
   font-weight: 500;
   font-size: 22px;
   position: absolute;
+  text-decoration: none;
   -webkit-transform: translate(0, -50%);
   -moz-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
@@ -191,6 +197,20 @@ h1, h2, h3, p {
   color: #fff;
 }
 .header__search {
+  margin: -20px 0;
+  padding: 20px 0;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+.header__search > input {
+  border: 0;
+  height: 100%;
+  padding: 20px 0;
+  padding-left: 0.5em;
+}
+.header__searchIcon {
   top: 50%;
   font-size: 20px;
   color: #fff;
@@ -282,6 +302,7 @@ h1, h2, h3, p {
 .card__message {
   font-size: 14px;
   font-weight: 400;
+  line-height: 18px;
 }
 
 /*# sourceMappingURL=index.css.map */

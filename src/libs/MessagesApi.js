@@ -1,13 +1,18 @@
 import Message from '../types/Message'
 
+const response = require('./response.json')
 const api = "http://message-list.appspot.com/"
 const headers = {
   'Accept': 'application/json',
 }
 
 export const get = () =>
-  	fetch(`${api}/messages`, { headers })
-	    .then(res => res.json())
+	new Promise((resolve, reject) => {
+		resolve(response)
+	})
+
+  	//fetch(`${api}/messages`, { headers })
+	//    .then(res => res.json())
 
 // Transform message from API to internal data type
 export const toInternalMessage = (message) =>
