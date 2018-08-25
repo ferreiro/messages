@@ -33,7 +33,9 @@ class Home extends Component {
               	/>
 
 		        <div className="container">
-		          <CardList messages={messages} />
+		        	<div className="container__wrapper">
+		          		<CardList messages={messages} />
+		          	</div>
 		        </div>
 	        </div>
         )

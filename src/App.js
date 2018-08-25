@@ -56,22 +56,21 @@ class App extends Component {
   }
 
   activateCompactMode = () => {
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.add(COMPACT_MODE_CLASSNAME)
+
     this.setState({
       compactMode: true
     })
-
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.add(COMPACT_MODE_CLASSNAME)
   }
 
-  deactivateCompactMode = () => {
-    console.log(this)
+  deactivateCompactMode = () => {    
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.remove(COMPACT_MODE_CLASSNAME)
+
     this.setState({
       compactMode: false
     })
-    
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.remove(COMPACT_MODE_CLASSNAME)
   }
 
   render() {

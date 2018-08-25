@@ -343,7 +343,7 @@ input {
 	&__search {
 		margin: -20px 0;
 		padding: 20px 0;
-		font-size: 14px;
+		font-size: 16px;
 		display: inline-block;
 		vertical-align: middle;
 		margin-left: 0.5em;
@@ -385,6 +385,9 @@ input {
 	.container {
 		padding: 0;
 	}
+	.container__wrapper {
+		padding: 0;
+	}
 
 	.card {
 		margin: 0;
@@ -394,7 +397,37 @@ input {
 
 .container {
 	margin-top: 60px;
+}
+
+.container__wrapper {
 	padding: 0.4em 1em;
+}
+
+.search__history {
+	width: 100%;
+	background: #fff;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	&__item {
+		padding: 1.2em 1.45em;
+		border-bottom: 1px solid #cecece;
+
+		&:nth-child(1) {
+			padding-top: 1.5em;
+		}
+	}
+	&__icon {
+		display: inline-block;
+		color: rgba(0, 0, 0, 0.8);	    margin-right: 0.75em;
+	}
+
+	&__text {
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.8);
+		display: inline-block;
+	}
 }
 
 .cardList {

@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import CardList from './components/CardList'
-import Header from './components/common/Header'
+import HistoryQuery from './types/HistoryQuery'
 
+import Header from './components/common/Header'
+import SearchHistory from './components/SearchHistory'
+import CardList from './components/CardList'
 
 class Search extends Component {
     static propTypes = {
@@ -12,31 +14,68 @@ class Search extends Component {
     }
 
     state = {
-        query: ''
+        query: '',
+        searchedMessages: [],
+        previousSearches: [
+            new HistoryQuery({ query: 'William', date: new Date() }),
+            new HistoryQuery({ query: 'Paul', date: new Date() }),
+            new HistoryQuery({ query: 'Maria Shar', date: new Date() }),
+            new HistoryQuery({ query: 'Reinaldo Maldonado', date: new Date() }),
+            new HistoryQuery({ query: 'Ben Suarez', date: new Date() }),
+            new HistoryQuery({ query: 'Pablo Marcos', date: new Date() }),
+        ]
+    }
+
+    componentDidMount () {
+        // getCachedPreviousSearchess
+    }
+
+    changeQuery = (newQuery) => {
+        this.setState({ query: newQuery })
     }
 
     handleChange = (event) => {
-        const newQuery = event.target.value
+        const query = event.target.value
+        this.changeQuery(query)
+
+        if (query.length === 0) {
+            this.clearSearchResult()
+        } else {
+            this.getSearchResult(query)
+        }
+    }
+
+    clearSearchResult = () => {
         this.setState({
-            query: newQuery
+            searchedMessages: []
         })
     }
 
-    getSearchMessages (messages) {
-        const { query } = this.state
-
+    getSearchResult = (query) => {
+        const { messages } = this.props
         const normalizedQuery = query.toLowerCase().trim()
 
-        return messages.filter(message => {
-            return message.content.toLowerCase().includes(normalizedQuery)
-                    || message.authorName.toLowerCase().includes(normalizedQuery)
+        this.setState({
+            searchedMessages: messages.filter(message => {
+                return message.content.toLowerCase().includes(normalizedQuery)
+                        || message.authorName.toLowerCase().includes(normalizedQuery)
+            })
         })
+    }
+
+    loadHistoryQuery = (historyQuery) => {
+        this.setState({
+            query: historyQuery.trim()
+        })
+
+        /*
+        this.setState((prevState, pros) => ({
+            previousSearches: [ historyQuery, ...prevState.previousSearches]
+        }))
+        */
     }
 
     render() {
-        const { query } = this.state
-        const { messages } = this.props
-
         return (
         	<div className="Page">
 
@@ -63,17 +102,36 @@ class Search extends Component {
                     </div>
                 </header>
 
-                <div className="searchResults__title">
-                    <span>Results</span>
-                    <span>20</span>
-                </div>
-
-                Welcome to the search!
-
 		        <div className="container">
-                    <div className="searchResults">
-                        <CardList messages={this.getSearchMessages(messages)} />
-                    </div>
+
+                    {this.state.searchedMessages.length === 0
+                        ? (
+                            <div>
+                                {this.state.query.length === 0
+                                    ? (
+                                        <SearchHistory
+                                            previousSearches={this.state.previousSearches}
+                                            onChangeQuery={this.changeQuery}
+                                        />
+                                    ) : (
+                                        <div>
+                                            no results!
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        ) : (
+                            <div className="container__wrapper">
+                                <div className="searchResults__title">
+                                    <span>Results</span>
+                                    <span>{this.state.searchedMessages.length}</span>
+                                </div>
+                                <div className="searchResults">
+                                    <CardList messages={this.state.searchedMessages} />
+                                </div>
+                            </div>
+                        )
+                    }
 		        </div>
 	        </div>
         )

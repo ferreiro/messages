@@ -199,7 +199,7 @@ input {
 .header__search {
   margin: -20px 0;
   padding: 20px 0;
-  font-size: 14px;
+  font-size: 16px;
   display: inline-block;
   vertical-align: middle;
   margin-left: 0.5em;
@@ -237,6 +237,9 @@ input {
 .compact .container {
   padding: 0;
 }
+.compact .container__wrapper {
+  padding: 0;
+}
 .compact .card {
   margin: 0;
   border-bottom: 1px solid #e5e5e5;
@@ -244,7 +247,35 @@ input {
 
 .container {
   margin-top: 60px;
+}
+
+.container__wrapper {
   padding: 0.4em 1em;
+}
+
+.search__history {
+  width: 100%;
+  background: #fff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.search__history__item {
+  padding: 1.2em 1.45em;
+  border-bottom: 1px solid #cecece;
+}
+.search__history__item:nth-child(1) {
+  padding-top: 1.5em;
+}
+.search__history__icon {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.8);
+  margin-right: 0.75em;
+}
+.search__history__text {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  display: inline-block;
 }
 
 .card {
