@@ -25,11 +25,11 @@ class App extends Component {
       this.loadInitialMessages()
   }
 
-  isCompactModeActivated () {
+  isCompactModeActivated = () => {
     return this.state.compactMode
   }
 
-  loadInitialMessages () {
+  loadInitialMessages = () => {
       MessagesApi.get()
           .then(response => {
             const { count, pageToken, messages } = response
@@ -43,20 +43,19 @@ class App extends Component {
           .catch(err => console.log(err))
   }
 
-  addMessage (message) {
+  addMessage = (message) => {
     this.setState((prevState, props) => ({
       messages: [ ...prevState.messages, message ]
     }))
   }
 
-  updateNextPageToken (newToken) {
+  updateNextPageToken = (newToken) => {
     this.setState({
       nextPageToken: newToken
     })
   }
 
-  activateCompactMode () {
-    console.log(this)
+  activateCompactMode = () => {
     this.setState({
       compactMode: true
     })
@@ -65,7 +64,7 @@ class App extends Component {
     body.classList.add(COMPACT_MODE_CLASSNAME)
   }
 
-  deactivateCompactMode () {
+  deactivateCompactMode = () => {
     console.log(this)
     this.setState({
       compactMode: false
@@ -88,7 +87,6 @@ class App extends Component {
             <meta charset="UTF-8" />
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
           </Helmet>
-          {console.log(this)}
           <Switch>
               <Route
                   path='/'
