@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5"
+    "react-helmet": "^5.2.0",
+    "react-scripts": "1.1.5",
+    "timeago.js": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn sass:build && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass:watch": "sass --watch src/styles/scss:src/styles/css",
+    "sass:build": "sass --update src/styles/scss:src/styles/css"
   }
 }
