@@ -20,7 +20,7 @@ class SearchHistoryItem extends Component {
 	            onClick={this.handleEvent}
 	        >
 	            <div className="search__history__icon">
-	                <span className="icon icon-brightness_low"></span>
+	                <span className="icon icon-update"></span>
 	            </div>
 	            <span className="search__history__text">{searchItem.query}</span>
 	        </li>
