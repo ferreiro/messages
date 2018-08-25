@@ -105,7 +105,9 @@ class App extends Component {
                 }
               </li>
 
-              <li className="header__item"></li>
+              <li className="header__item">
+                <span className="header__search icon icon-search"></span>
+              </li>
 
             </ul>
 
