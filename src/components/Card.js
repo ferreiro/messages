@@ -10,6 +10,14 @@ class Card extends Component {
 		isHidden: false
 	}
 
+	removeCard () {
+		const { onRemoveMessage } = this.props
+
+		// Run the animation here
+
+		onRemoveMessage(this)
+	}
+
 	render () {
 		const { message } = this.props
 

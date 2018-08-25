@@ -1,6 +1,100 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:500,400');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css');
 
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?1h30t0');
+  src:  url('../fonts/icomoon.eot?1h30t0#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?1h30t0') format('truetype'),
+    url('../fonts/icomoon.woff?1h30t0') format('woff'),
+    url('../fonts/icomoon.svg?1h30t0#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-apps:before {
+  content: "\e5c3";
+}
+.icon-archive:before {
+  content: "\e149";
+}
+.icon-arrow_back:before {
+  content: "\e5c4";
+}
+.icon-arrow_downward:before {
+  content: "\e5db";
+}
+.icon-brightness_2:before {
+  content: "\e3a7";
+}
+.icon-brightness_low:before {
+  content: "\e1ad";
+}
+.icon-check:before {
+  content: "\e5ca";
+}
+.icon-close:before {
+  content: "\e5cd";
+}
+.icon-dehaze:before {
+  content: "\e3c7";
+}
+.icon-done:before {
+  content: "\e876";
+}
+.icon-done_all:before {
+  content: "\e877";
+}
+.icon-drafts:before {
+  content: "\e151";
+}
+.icon-favorite:before {
+  content: "\e87d";
+}
+.icon-favorite_border:before {
+  content: "\e87e";
+}
+.icon-star:before {
+  content: "\e838";
+}
+.icon-keyboard_arrow_down:before {
+  content: "\e313";
+}
+.icon-keyboard_arrow_up:before {
+  content: "\e316";
+}
+.icon-keyboard_backspace:before {
+  content: "\e317";
+}
+.icon-star_border:before {
+  content: "\e83a";
+}
+.icon-view_agenda:before {
+  content: "\e8e9";
+}
+.icon-view_day:before {
+  content: "\e8ed";
+}
+.icon-view_stream:before {
+  content: "\e8f2";
+}
+
+
 // Source: https://css-tricks.com/snippets/css/useful-css3-less-mixins/
 
 @mixin text-shadow($string: 0 1px 3px rgba(0, 0, 0, 0.25))
@@ -197,10 +291,19 @@ h1, h2, h3, p {
 	&__burger {
 		width: 18px;
 		height: 12px;
-		background: red;
 		display: inline-block;
 		vertical-align: middle;
 		margin-left: 4px;
+		position: relative;
+
+		&> span {
+			top: 50%;
+			color: #fff;
+			font-weight: 500;
+			font-size: 22px;
+			position: absolute;
+			@include translate(0, -50%);
+		}
 	}
 
 	&__logo {
@@ -254,6 +357,7 @@ h1, h2, h3, p {
 	-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
 	box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
 	@include border-radius(2px);
+	@include transition(all 120ms);
 
 	&__header {
 		margin-bottom: 1em;

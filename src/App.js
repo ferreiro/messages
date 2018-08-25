@@ -5,10 +5,39 @@ import './App.css';
 import CardList from './components/CardList'
 import * as MessagesApi from './libs/MessagesApi'
 
+const COMPACT_MODE_CLASSNAME = 'compact'
+
 class App extends Component {
   state = {
     messages: [],
-    nextPageToken: null
+    nextPageToken: null,
+    compactMode: false 
+  }
+
+  componentDidMount() {
+      this.isCompactModeActivated() && (
+        this.activateCompactMode()
+      )
+
+      this.loadInitialMessages()
+  }
+
+  isCompactModeActivated () {
+    return this.state.compactMode
+  }
+
+  loadInitialMessages () {
+      MessagesApi.get()
+          .then(response => {
+            const { count, pageToken, messages } = response
+
+            messages.forEach(message => {
+              this.addMessage(MessagesApi.toInternalMessage(message))
+            })
+
+            this.updateNextPageToken(pageToken)
+          })
+          .catch(err => console.log(err))
   }
 
   addMessage (message) {
@@ -23,18 +52,22 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-      MessagesApi.get()
-          .then(response => {
-            const { count, pageToken, messages } = response
+  activateCompactMode () {
+    this.setState({
+      compactMode: true
+    })
 
-            messages.forEach(message => {
-              this.addMessage(MessagesApi.toInternalMessage(message))
-            })
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.add(COMPACT_MODE_CLASSNAME)
+  }
 
-            this.updateNextPageToken(pageToken)
-          })
-          .catch(err => console.log(err))
+  deactivateCompactMode () {
+    this.setState({
+      compactMode: false
+    })
+    
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.remove(COMPACT_MODE_CLASSNAME)
   }
 
   render() {
@@ -51,18 +84,31 @@ class App extends Component {
 
         <header className="header">
           <div className="header__wrapper">
-            <div className="header__burger"></div>
+
+            <div className="header__burger">
+              <span className="icon icon-dehaze"></span>
+            </div>
+
             <div className="header__logo">
               Messages
             </div>
-            <ul className="header__options">
+
+            <ul className="header__options" style={{float: 'right'}}>
+
               <li className="header__item">
-                <div className="">Test</div>
+                {this.isCompactModeActivated()
+                    ? (
+                      <button onClick={() => this.deactivateCompactMode()}>Disable compact</button>
+                    ) : (
+                      <button onClick={() => this.activateCompactMode()}>Activate compact</button>
+                    ) 
+                }
               </li>
-              <li className="header__item">
-                <div className="">Test</div>
-              </li>
+
+              <li className="header__item"></li>
+
             </ul>
+
           </div>
         </header>
 
