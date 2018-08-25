@@ -1,12 +1,12 @@
 import Message from '../types/Message'
 
-const api = "http://message-list.appspot.com/messages"
+const api = "http://message-list.appspot.com/"
 const headers = {
   'Accept': 'application/json',
 }
 
 export const get = () =>
-  	fetch(api, { headers })
+  	fetch(`${api}/messages`, { headers })
 	    .then(res => res.json())
 
 // Transform message from API to internal data type
@@ -15,6 +15,6 @@ export const toInternalMessage = (message) =>
 		id: message.id,
 		content: message.content,
 		updated: message.updated,
-		authorName: "William Shakespeare",
-	  	avatarUrl: "/photos/william-shakespeare.jpg"
+		authorName: message.author.name,
+	  	avatarUrl: `${api}/${message.author.photoUrl}`
 	})

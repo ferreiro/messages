@@ -98,6 +98,7 @@ h1, h2, h3, p {
   background: #e9e9e9;
   display: inline-block;
   vertical-align: middle;
+  background-size: cover;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
