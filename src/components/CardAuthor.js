@@ -5,7 +5,7 @@ function CardAuthor (props) {
 	const { authorName } = props
 
 	return (
-		<div class="card__author">
+		<div className="card__author">
 			{authorName}
 		</div>
 	)

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet'
 import './App.css';
 
-import Message from './types/Message'
 import CardList from './components/CardList'
 import * as MessagesApi from './libs/MessagesApi'
 
@@ -13,9 +12,9 @@ class App extends Component {
   }
 
   addMessage (message) {
-    this.setState((current) => {
-      messages: current.messages.push(message)
-    })
+    this.setState((prevState, props) => ({
+      messages: [ ...prevState.messages, message ]
+    }))
   }
 
   updateNextPageToken (newToken) {
