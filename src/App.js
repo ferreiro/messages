@@ -4,32 +4,38 @@ import './App.css';
 
 import Message from './types/Message'
 import CardList from './components/CardList'
+import * as MessagesApi from './libs/MessagesApi'
 
 class App extends Component {
   state = {
-    messages: [
-      new Message({
-          "id":1,
-          "content":"Her pretty looks have been mine enemies, And therefore have I invoked thee for her seal, and meant thereby Thou shouldst print more, not let that pine to aggravate thy store Buy terms divine in selling hours of dross Within be fed, without be rich no more So shalt thou feed on Death, that feeds on men, And Death once dead, there's no more to shame nor me nor you.",
-          "updated":new Date(),
-          "authorName": "William Shakespeare",
-          "avatarUrl": "/photos/william-shakespeare.jpg"
-      }),
-      new Message({
-          "id":2,
-          "content":"Her pretty looks have been mine enemies, And therefore have I invoked thee for her seal, and meant thereby Thou shouldst print more, not let that pine to aggravate thy store Buy terms divine in selling hours of dross Within be fed, without be rich no more So shalt thou feed on Death, that feeds on men, And Death once dead, there's no more to shame nor me nor you.",
-          "updated":new Date() - 60000 * 30,
-          "authorName": "William Shakespeare",
-          "avatarUrl": "/photos/william-shakespeare.jpg"
-      }),
-      new Message({
-          "id":3,
-          "content":"Her pretty looks have been mine enemies, And therefore have I invoked thee for her seal, and meant thereby Thou shouldst print more, not let that pine to aggravate thy store Buy terms divine in selling hours of dross Within be fed, without be rich no more So shalt thou feed on Death, that feeds on men, And Death once dead, there's no more to shame nor me nor you.",
-          "updated":"2015-02-01T07:46:23Z",
-          "authorName": "William Shakespeare",
-          "avatarUrl": "/photos/william-shakespeare.jpg"
-      })
-    ],
+    messages: [],
+    nextPageToken: null
+  }
+
+  addMessage (message) {
+    this.setState((current) => {
+      messages: current.messages.push(message)
+    })
+  }
+
+  updateNextPageToken (newToken) {
+    this.setState({
+      nextPageToken: newToken
+    })
+  }
+
+  componentDidMount() {
+      MessagesApi.get()
+          .then(response => {
+            const { count, pageToken, messages } = response
+
+            messages.forEach(message => {
+              this.addMessage(MessagesApi.toInternalMessage(message))
+            })
+
+            this.updateNextPageToken(pageToken)
+          })
+          .catch(err => console.log(err))
   }
 
   render() {
