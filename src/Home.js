@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import CardList from './components/CardList'
-import Header from './components/common/Header'
-
+import Header from './components/Header'
 
 class Home extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
         onAddMessage: PropTypes.func.isCompactMode,
-        isCompactMode: PropTypes.func.isCompactMode,
+        isCompactMode: PropTypes.bool.isCompactMode,
         activateCompactMode: PropTypes.func.isRequired,
-        deactivateCompactMode: PropTypes.bool.isRequired,
+        deactivateCompactMode: PropTypes.func.isRequired,
     }
 
     render() {

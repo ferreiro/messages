@@ -12,6 +12,15 @@ class HistoryQuery {
 			}
 		})
 	}
+
+	toString = () => {
+		const { query, date } = this
+		const history = {
+			query,
+			date,
+		}
+		return JSON.stringify(history)
+	}
 } 
 
 export default HistoryQuery

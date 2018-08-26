@@ -1,18 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Card from './Card'
 import SearchHistoryItem from './SearchHistoryItem'
 
 function SearchHistory (props) {
-	const { previousSearches, onChangeQuery } = props
+	const { previousSearches, onLoadSearchHistoryItem } = props
 
 	return (
 	    <ul className="search__history">
+	    	{console.log(previousSearches)}
 	        {previousSearches.map(searchItem => (
 	            <SearchHistoryItem
+	            	key={searchItem.date}
 	            	searchItem={searchItem}
-	            	onChangeQuery={onChangeQuery}
+	            	onLoadSearchHistoryItem={onLoadSearchHistoryItem}
 	            />
 	        ))}
 	    </ul>
@@ -20,7 +21,8 @@ function SearchHistory (props) {
 }
 
 SearchHistory.propTypes = {
-	onChangeQuery: PropTypes.func.isRequired
+	previousSearches: PropTypes.array.isRequired,
+	onLoadSearchHistoryItem: PropTypes.func.isRequired,
 }
 
 export default SearchHistory

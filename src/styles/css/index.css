@@ -275,6 +275,47 @@ input {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.night {
+  background: #141b23 !important;
+}
+.night .header,
+.night .header__search > input {
+  color: #fff !important;
+  background: #273445 !important;
+}
+.night .header span,
+.night .header__search > input span {
+  color: #fff !important;
+}
+.night .search__history {
+  color: #fff !important;
+  background: #1d2835 !important;
+}
+.night .search__history > li {
+  border-bottom: #293646 !important;
+}
+.night .search__history__icon,
+.night .search__history__text {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.night .search__title {
+  color: #7890b5;
+  background: #161f2b;
+}
+.night .card {
+  background: #1d2835 !important;
+  border-bottom: #293646 !important;
+}
+.night .card .card__date {
+  color: #808e91;
+}
+.night .card .card__author {
+  color: #fff;
+}
+.night .card .card__message {
+  color: #fff;
+}
+
 .container {
   margin-top: 60px;
 }

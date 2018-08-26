@@ -6,7 +6,7 @@ const headers = {
   'Accept': 'application/json',
 }
 
-export const get = () =>
+export const get = (options) =>
 	new Promise((resolve, reject) => {
 		resolve(response)
 	})

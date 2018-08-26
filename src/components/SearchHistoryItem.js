@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class SearchHistoryItem extends Component {
-	// Load the query into the search inout
 	handleEvent = (event) => {
-		const { onChangeQuery, searchItem } = this.props
-
 		event.preventDefault()
-		onChangeQuery(searchItem.query)
+
+		const { onLoadSearchHistoryItem, searchItem } = this.props
+		onLoadSearchHistoryItem(searchItem.query)
 	}
 
 	render () {
@@ -16,7 +15,6 @@ class SearchHistoryItem extends Component {
 		return (
 			<li
 	            className="search__history__item"
-	            key={searchItem.date}
 	            onClick={this.handleEvent}
 	        >
 	            <div className="search__history__icon">
@@ -29,7 +27,7 @@ class SearchHistoryItem extends Component {
 }
 
 SearchHistoryItem.propTypes = {
-	onChangeQuery: PropTypes.func.isRequired
+	onLoadSearchHistoryItem: PropTypes.func.isRequired
 }
 
 export default SearchHistoryItem

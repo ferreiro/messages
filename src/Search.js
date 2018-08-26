@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import HistoryQuery from './types/HistoryQuery'
+import SearchHistoryRepository from './libs/SearchHistoryRepository'
 
-import Header from './components/common/Header'
+import SearchHeader from './components/SearchHeader'
 import SearchHistory from './components/SearchHistory'
-import CardList from './components/CardList'
+import SearchResult from './components/SearchResult'
 
 class Search extends Component {
     static propTypes = {
@@ -15,39 +15,52 @@ class Search extends Component {
 
     state = {
         query: '',
-        searchedMessages: [],
+        filteredMessages: [],
         previousSearches: [
-            new HistoryQuery({ query: 'William', date: new Date() }),
-            new HistoryQuery({ query: 'Paul', date: new Date() }),
-            new HistoryQuery({ query: 'Maria Shar', date: new Date() }),
-            new HistoryQuery({ query: 'Reinaldo Maldonado', date: new Date() }),
-            new HistoryQuery({ query: 'Ben Suarez', date: new Date() }),
-            new HistoryQuery({ query: 'Pablo Marcos', date: new Date() }),
-        ]
+            SearchHistoryRepository.create({ query: 'William Shakespeare' })
+        ],
+        displaySearchHistory: true,
     }
 
     componentDidMount () {
-        // getCachedPreviousSearchess
+        this.focusOnSearch()
+        this.setState({ previousSearches: SearchHistoryRepository.getQueries() })
     }
 
-    changeQuery = (newQuery) => {
-        this.setState({ query: newQuery })
+    focusOnSearch = () => {
+        const input = document.getElementById('searchQueryInput')
+        input.focus()
     }
 
-    handleChange = (event) => {
-        const query = event.target.value
-        this.changeQuery(query)
+    udpateQuery = (query) => this.setState({ query })
+    
+    onChangeQuery = (event) => this.udpateQuery(event.target.value)
+
+    onClearSearch = (event) => {
+        event.preventDefault()
+        this.clearSearchResult()
+        this.focusOnSearch()
+    }
+
+    onSubmitQuery = (event) => {
+        event.preventDefault()
+
+        const input = document.getElementById('searchQueryInput')
+        const query = input.value
 
         if (query.length === 0) {
             this.clearSearchResult()
         } else {
+            this.addSearchHistoryItem(query)
             this.getSearchResult(query)
         }
     }
 
     clearSearchResult = () => {
+        this.showSearchHistory()
         this.setState({
-            searchedMessages: []
+            query: '',
+            filteredMessages: [],
         })
     }
 
@@ -55,96 +68,66 @@ class Search extends Component {
         const { messages } = this.props
         const normalizedQuery = query.toLowerCase().trim()
 
+        this.hideSearchHistory()
         this.setState({
-            searchedMessages: messages.filter(message => {
+            filteredMessages: messages.filter(message => {
                 return message.content.toLowerCase().includes(normalizedQuery)
                         || message.authorName.toLowerCase().includes(normalizedQuery)
             })
         })
     }
 
-    loadHistoryQuery = (historyQuery) => {
-        this.setState({
-            query: historyQuery.trim()
+    hideSearchHistory = () => this.setState({ displaySearchHistory: false })
+    showSearchHistory = () => this.setState({ displaySearchHistory: true })
+
+    loadSearchHistoryItem = (query) => {
+        this.udpateQuery(query)
+        this.getSearchResult(query)
+        this.hideSearchHistory()
+    }
+
+    addSearchHistoryItem = (query) => {
+        const historyQuery = SearchHistoryRepository.create({
+            query, date: new Date()
         })
+
+        console.log('query', query)
+        console.log('new historyQuery', historyQuery)
+
+        this.setState((prevState) => ({
+            previousSearches: [ historyQuery, ...prevState.previousSearches]
+        }))
+
+        console.log('historyQuery', this.state.previousSearches)
     }
 
     render() {
         return (
         	<div className="Page">
+                <SearchHeader
+                    query={this.state.query}
+                    onChangeQuery={this.onChangeQuery}
+                    onClearSearch={this.onClearSearch}
+                    onSubmitHandler={this.onSubmitQuery}
+                />
 
-                <header className="header flex" style={{ backgroundColor: '#fff' }}>
-                    <div className="flexbox">
-                        <div className="header__burger" style={{height: '100%'}}>
-                            <Link to='/'>
-                                <span
-                                    className="icon icon-arrow_back"
-                                    style={{
-                                        color: '#000'
-                                    }}
-                                >
-                                </span>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="header__search flexbox__elastic">
-                        <input
-                            type="text"
-                            value={this.state.query}
-                            placeholder="Search message"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-
-                    <div className="flexbox">
-                        <div className="header__burger" style={{height: '100%'}}>
-                            <span
-                                className="icon icon-close"
-                                style={{
-                                    color: '#000'
-                                }}
-                            >
-                            </span>
-                        </div>
-                    </div>
-                </header>
-
-                {this.state.searchedMessages.length === 0
-                    ? (
-                        <div className="container">
-                            {this.state.query.length === 0
-                                ? (
-                                    <SearchHistory
-                                        previousSearches={this.state.previousSearches}
-                                        onChangeQuery={this.changeQuery}
-                                    />
-                                ) : (
-                                    <div>
-                                        no results!
-                                    </div>
-                                )
-                            }
-                        </div>
-                    ) : (
-                        <div className="container">
-                            <div className="search__title flex">
-                                <span className="flexbox__elastic">Results</span>
-                                <span className="flexbox">{this.state.searchedMessages.length}</span>
-                            </div>
-                            <div className="container__wrapper">
-                                <div className="searchResults">
-                                    <CardList messages={this.state.searchedMessages} />
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
+                <div className="container">
+                    {this.state.displaySearchHistory === true
+                        ? (
+                            <SearchHistory
+                                previousSearches={this.state.previousSearches}
+                                onLoadSearchHistoryItem={this.loadSearchHistoryItem}
+                            />
+                        ) : (
+                            <SearchResult
+                                messages={this.state.filteredMessages}
+                            />
+                        )
+                    }
+                </div>
 	        </div>
         )
     }
 }
-
-// <Searchheader> <SearchResults messages={} query={}>
 
 export default Search

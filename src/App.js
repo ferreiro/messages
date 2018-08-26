@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 
 import Home from './Home'
 import Search from './Search'
-import CardList from './components/CardList'
 import * as MessagesApi from './libs/MessagesApi'
 import './styles/css/index.css';
 
@@ -14,23 +13,35 @@ class App extends Component {
   state = {
     messages: [],
     nextPageToken: null,
-    compactMode: false 
+    compactMode: true,
+    nightMode: false,
   }
 
   componentDidMount() {
-      this.isCompactModeActivated() && (
-        this.activateCompactMode()
-      )
+      this.isCompactModeActivated() && (this.activateCompactMode())
+      this.isNightModeActivated() && (this.activateNigthMode())
+      this.getMessages()
 
-      this.loadInitialMessages()
+      /*
+      setInterval(() => {
+        this.loadInitialMessages()
+      }, 2000)
+      */
   }
 
   isCompactModeActivated = () => {
     return this.state.compactMode
   }
 
-  loadInitialMessages = () => {
-      MessagesApi.get()
+  isNightModeActivated = () => {
+    return this.state.nightMode
+  }
+
+  getMessages = () => {
+      MessagesApi.get({
+        limit: 30,
+        pakeToken: '303030',
+      })
           .then(response => {
             const { count, pageToken, messages } = response
 
@@ -55,22 +66,28 @@ class App extends Component {
     })
   }
 
+  activateNigthMode = () => {
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.add('night')
+    this.setState({ nightMode: true })
+  }
+
+  deactivateNigthMode = () => {
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.remove('night')
+    this.setState({ nightMode: false })
+  }
+
   activateCompactMode = () => {
     const body = document.getElementsByTagName('body')[0]
     body.classList.add(COMPACT_MODE_CLASSNAME)
-
-    this.setState({
-      compactMode: true
-    })
+    this.setState({ compactMode: true })
   }
 
   deactivateCompactMode = () => {    
     const body = document.getElementsByTagName('body')[0]
     body.classList.remove(COMPACT_MODE_CLASSNAME)
-
-    this.setState({
-      compactMode: false
-    })
+    this.setState({ compactMode: false })
   }
 
   render() {
