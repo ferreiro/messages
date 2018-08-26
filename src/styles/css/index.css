@@ -294,13 +294,19 @@ input {
 .night .search__history > li {
   border-bottom: #293646 !important;
 }
-.night .search__history__icon,
-.night .search__history__text {
+.night .search__history__icon, .night .search__history__text {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 .night .search__title {
   color: #7890b5;
   background: #161f2b;
+}
+.night .search__notFound__icon {
+  background: #526a86;
+  color: rgba(255, 255, 255, 0.9);
+}
+.night .search__notFound__text {
+  color: rgba(255, 255, 255, 0.6);
 }
 .night .card {
   background: #1d2835 !important;
@@ -329,6 +335,48 @@ input {
   padding: 0.5em 1em;
   background: #cecece;
 }
+.search__notFound {
+  position: relative;
+  height: calc(100vh - 70px);
+  text-align: center;
+}
+.search__notFound__wrapper {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.search__notFound__icon {
+  width: 90px;
+  height: 90px;
+  background: #d6d6d6;
+  position: relative;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.search__notFound__icon > span {
+  top: 50%;
+  left: 50%;
+  color: #636262;
+  font-size: 40px;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.search__notFound__text {
+  font-size: 18px;
+  margin-top: 1em;
+  color: rgba(0, 0, 0, 0.6);
+}
 .search__history {
   width: 100%;
   background: #fff;
@@ -350,8 +398,9 @@ input {
 }
 .search__history__text {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.8);
   display: inline-block;
+  word-break: break-word;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .card {

@@ -477,44 +477,30 @@ input {
 		color: #fff !important;
 		background: rgb(39, 52, 69) !important;
 
-		span {
-			color: #fff !important;
-		}
+		span { color: #fff !important; }
 	}
 
 	.search__history {
 		color: #fff !important;
 		background: #1d2835 !important;
-		&> li {
-			border-bottom: #293646 !important;
-		}
+
+		&> li { border-bottom: #293646 !important; }
 	}
 
-	.search__history__icon,
-	.search__history__text {
-	    color: rgba(255, 255, 255, 0.6) !important;
+	.search__history__icon, .search__history__text {
+		color: rgba(255, 255, 255, 0.6) !important;
 	}
-
-	.search__title {
-		color: #7890b5;
-		background: #161f2b;
-	}
+	.search__title { color: #7890b5; background: #161f2b; }
+	.search__notFound__icon { background: #526a86; color: rgba(255, 255, 255, 0.9); }
+	.search__notFound__text { color: rgba(255, 255, 255, 0.6); }
 
 	.card {
 		background: rgb(29, 40, 53) !important;
 		border-bottom: #293646 !important;
 
-		.card__date {
-			color: rgb(128, 142, 145);
-		}
-
-		.card__author {
-			color: #fff;
-		}
-
-		.card__message {
-			color: #fff;
-		}
+		.card__date { color: rgb(128, 142, 145); }
+		.card__author { color: #fff; }
+		.card__message { color: #fff; }
 	}
 }
 
@@ -533,6 +519,44 @@ input {
 		background: #cecece;
 	}
 
+	&__notFound {
+		position: relative;
+		height: calc(100vh - 70px);
+		text-align: center;
+
+		&__wrapper {
+			top: 50%;
+			left: 50%;
+			position: absolute;
+
+			@include translate(-50%, -50%);
+		}
+
+		&__icon {
+			width: 90px;
+			height: 90px;
+			background: #d6d6d6;
+			position: relative;
+			@include border-radius(60px);
+
+			&> span {
+				top: 50%;
+				left: 50%;
+				color: #636262;
+				font-size: 40px;
+				position: absolute;
+
+				@include translate(-50%, -50%);
+			}
+		}
+
+		&__text {
+			font-size: 18px;
+			margin-top: 1em;
+			color: rgba(0, 0, 0, 0.6);
+		}
+	}
+
 	&__history {
 		width: 100%;
 		background: #fff;
@@ -548,15 +572,18 @@ input {
 				padding-top: 1.5em;
 			}
 		}
+
 		&__icon {
 			display: inline-block;
-			color: rgba(0, 0, 0, 0.8);	    margin-right: 0.75em;
+			color: rgba(0, 0, 0, 0.8);
+			margin-right: 0.75em;
 		}
 
 		&__text {
 			font-size: 14px;
-			color: rgba(0, 0, 0, 0.8);
 			display: inline-block;
+		    word-break: break-word;
+		    color: rgba(0, 0, 0, 0.8);
 		}
 	}
 }

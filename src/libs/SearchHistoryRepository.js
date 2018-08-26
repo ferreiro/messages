@@ -15,6 +15,10 @@ class SearchHistoryRepository {
 		return newItem
 	}
 
+    static getMaxSearches () {
+        return MAX_HISTORY_CACHED
+    }
+
 	static addQuery = (historyQuery) => {
         if (historyQuery.length === 0) {
             return;

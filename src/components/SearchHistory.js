@@ -8,7 +8,6 @@ function SearchHistory (props) {
 
 	return (
 	    <ul className="search__history">
-	    	{console.log(previousSearches)}
 	        {previousSearches.map(searchItem => (
 	            <SearchHistoryItem
 	            	key={searchItem.date}

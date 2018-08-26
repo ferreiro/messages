@@ -7,7 +7,7 @@ function SearchNotFound (props) {
 				<div className="search__notFound__icon">
 					<span className="icon icon-search"></span>
 				</div>
-				<div className="search__notFound__text">Not found</div>
+				<div className="search__notFound__text">No results</div>
 			</div>
 		</div>
 	)

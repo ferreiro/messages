@@ -17,7 +17,7 @@ class Search extends Component {
         query: '',
         filteredMessages: [],
         previousSearches: [
-            SearchHistoryRepository.create({ query: 'William Shakespeare' })
+            // SearchHistoryRepository.create({ query: 'William Shakespeare' })
         ],
         displaySearchHistory: true,
     }
@@ -91,14 +91,14 @@ class Search extends Component {
             query, date: new Date()
         })
 
-        console.log('query', query)
-        console.log('new historyQuery', historyQuery)
+        const updateHistorySearches = (prevState) => {
+            const newSearches = [ historyQuery, ...prevState.previousSearches]
+            return newSearches.slice(0, SearchHistoryRepository.getMaxSearches())
+        }
 
         this.setState((prevState) => ({
-            previousSearches: [ historyQuery, ...prevState.previousSearches]
+            previousSearches: updateHistorySearches(prevState)
         }))
-
-        console.log('historyQuery', this.state.previousSearches)
     }
 
     render() {
