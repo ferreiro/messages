@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
-import Home from './pages/Home'
-import Search from './pages/Search'
+import Home from './views/Home'
+import Search from './views/Search'
+import Configure from './views/Configure'
+import NotFound from './views/NotFound'
+
 import * as MessagesApi from './libs/MessagesApi'
 import '../styles/css/index.css';
 
@@ -113,11 +116,8 @@ class App extends Component {
                   render={() => (
                       <Home
                           messages={messages}
-                          isCompactMode={compactMode}
                           onAddMessage={this.addMessage}
                           onRemoveMessage={this.removeMessage}
-                          activateCompactMode={this.activateCompactMode}
-                          deactivateCompactMode={this.deactivateCompactMode}
                       />
                   )}
               ></Route>
@@ -127,6 +127,23 @@ class App extends Component {
                   render={() => (
                       <Search
                           messages={this.state.messages}
+                      />
+                  )}
+              ></Route>
+              <Route
+                  path='/configure'
+                  exact
+                  render={() => (
+                      <Configure
+                          activateCompactMode={this.activateCompactMode}
+                          deactivateCompactMode={this.deactivateCompactMode}
+                      />
+                  )}
+              ></Route>
+              <Route
+                  path='/'
+                  render={() => (
+                      <NotFound
                       />
                   )}
               ></Route>

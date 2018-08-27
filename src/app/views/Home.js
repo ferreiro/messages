@@ -9,9 +9,6 @@ class Home extends Component {
         messages: PropTypes.array.isRequired,
         onAddMessage: PropTypes.func.isCompactMode,
         onRemoveMessage: PropTypes.func.isCompactMode,
-        isCompactMode: PropTypes.bool.isCompactMode,
-        activateCompactMode: PropTypes.func.isRequired,
-        deactivateCompactMode: PropTypes.func.isRequired,
     }
 
     render() {
@@ -19,18 +16,11 @@ class Home extends Component {
         	messages,
         	onAddMessage,
             onRemoveMessage,
-        	activateCompactMode,
-        	deactivateCompactMode,
-        	isCompactMode,
         } = this.props
 
         return (
         	<div className="Page">
-	            <Header
-					activateCompactMode={activateCompactMode}
-					deactivateCompactMode={deactivateCompactMode}
-					isCompactMode={isCompactMode}
-              	/>
+	            <Header />
 
 		        <div className="container">
 		        	<div className="container__wrapper">
