@@ -20,6 +20,7 @@ class App extends Component {
     settings: {
       nightMode: false,
       compactMode: true,
+      infiniteScroll: true,
     }
   }
 
@@ -34,10 +35,6 @@ class App extends Component {
       }, 2000)
       */
   }
-
-  isCompactModeActivated = () => this.state.settings.compactMode
-
-  isNightModeActivated = () => this.state.settings.nightMode
 
   getMessages = () => {
       MessagesApi.get({
@@ -84,33 +81,45 @@ class App extends Component {
     body.classList.remove(className)
   }
 
-  activateNigthMode = () => {
-    this.addClassToBody(NIGTH_MODE_CLASSNAME)
+  setSettingsValue = (settingsValue) => {
     this.setState((prevState) => ({
-      settings: Object.assign(prevState.settings, { nightMode: true })
+      settings: Object.assign(prevState.settings, settingsValue)
     }))
+  }
+
+  activateNightMode = () => {
+    this.addClassToBody(NIGTH_MODE_CLASSNAME)
+    this.setSettingsValue({ nightMode: true })
   }
 
   deactivateNigthMode = () => {
     this.removeClassFromBody(NIGTH_MODE_CLASSNAME)
-    this.setState((prevState) => ({
-      settings: Object.assign(prevState.settings, { nightMode: false })
-    }))
+    this.setSettingsValue({ nightMode: false })
   }
 
   activateCompactMode = () => {
     this.addClassToBody(COMPACT_MODE_CLASSNAME)
-    this.setState((prevState) => ({
-      settings: Object.assign(prevState.settings, { compactMode: true })
-    }))
+    this.setSettingsValue({ compactMode: true })
   }
 
   deactivateCompactMode = () => {    
     this.removeClassFromBody(COMPACT_MODE_CLASSNAME)
-    this.setState((prevState) => ({
-      settings: Object.assign(prevState.settings, { compactMode: false })
-    }))
+    this.setSettingsValue({ compactMode: false })
   }
+
+  activateInfiniteScroll = () => {
+    this.setSettingsValue({ infiniteScroll: true })
+  }
+
+  deactivateInfiniteScroll = () => {    
+    this.setSettingsValue({ infiniteScroll: false })
+  }
+
+  isCompactModeActivated = () => this.state.settings.compactMode
+
+  isNightModeActivated = () => this.state.settings.nightMode
+
+  isInfiniteScroll = () => this.state.settings.infiniteScroll
 
   render() {
     const { messages, compactMode } = this.state
@@ -164,11 +173,14 @@ class App extends Component {
                             onGoBack={goBack}
                             onActivateCompactMode={this.activateCompactMode}
                             onDeactivateCompactMode={this.deactivateCompactMode}
-                            onActivateNightMode={this.activateNigthMode}
+                            onActivateNightMode={this.activateNightMode}
                             onDeactivateNightMode={this.deactivateNigthMode}
+                            onActivateInfiniteScroll={this.activateInfiniteScroll}
+                            onDeactivateInfiniteScroll={this.deactivateInfiniteScroll}
 
                             isCompactMode={this.isCompactModeActivated}
                             isNightMode={this.isNightModeActivated}
+                            isInfiniteScroll={this.isInfiniteScroll}
                         />
                       </div>
                     )

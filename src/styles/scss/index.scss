@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?xiz9iz');
-  src:  url('../fonts/icomoon.eot?xiz9iz#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?xiz9iz') format('truetype'),
-    url('../fonts/icomoon.woff?xiz9iz') format('woff'),
-    url('../fonts/icomoon.svg?xiz9iz#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?qlvoyx');
+  src:  url('../fonts/icomoon.eot?qlvoyx#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?qlvoyx') format('truetype'),
+    url('../fonts/icomoon.woff?qlvoyx') format('woff'),
+    url('../fonts/icomoon.svg?qlvoyx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -27,6 +27,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-infinite:before {
+  content: "\eb3d";
+}
 .icon-apps:before {
   content: "\e5c3";
 }
@@ -39,14 +42,11 @@
 .icon-arrow_downward:before {
   content: "\e5db";
 }
-.icon-av_timer:before {
-  content: "\e01b";
-}
 .icon-brightness_2:before {
   content: "\e3a7";
 }
-.icon-brightness_low:before {
-  content: "\e1ad";
+.icon-brightness_3:before {
+  content: "\e3a8";
 }
 .icon-check:before {
   content: "\e5ca";
@@ -57,23 +57,8 @@
 .icon-mode_edit:before {
   content: "\e254";
 }
-.icon-crop_3_2:before {
-  content: "\e3bd";
-}
-.icon-crop_landscape:before {
-  content: "\e3c3";
-}
-.icon-crop_7_5:before {
-  content: "\e3c0";
-}
 .icon-dehaze:before {
   content: "\e3c7";
-}
-.icon-done:before {
-  content: "\e876";
-}
-.icon-done_all:before {
-  content: "\e877";
 }
 .icon-drafts:before {
   content: "\e151";
@@ -87,17 +72,14 @@
 .icon-star:before {
   content: "\e838";
 }
-.icon-keyboard_arrow_down:before {
-  content: "\e313";
-}
-.icon-keyboard_arrow_up:before {
-  content: "\e316";
-}
-.icon-keyboard_backspace:before {
-  content: "\e317";
-}
 .icon-menu:before {
   content: "\e5d2";
+}
+.icon-person:before {
+  content: "\e7fd";
+}
+.icon-person_pin:before {
+  content: "\e55a";
 }
 .icon-search:before {
   content: "\e8b6";
@@ -108,14 +90,8 @@
 .icon-update:before {
   content: "\e923";
 }
-.icon-view_agenda:before {
-  content: "\e8e9";
-}
 .icon-view_day:before {
   content: "\e8ed";
-}
-.icon-view_stream:before {
-  content: "\e8f2";
 }
 
 // Source: https://css-tricks.com/snippets/css/useful-css3-less-mixins/

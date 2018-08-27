@@ -20,10 +20,13 @@ class Settings extends Component {
         const {
             isNightMode,
             isCompactMode,
+            isInfiniteScroll,
             onActivateCompactMode,
             onDeactivateCompactMode,
             onActivateNightMode,
             onDeactivateNightMode,
+            onActivateInfiniteScroll,
+            onDeactivateInfiniteScroll,
         } = this.props
 
         return [
@@ -35,6 +38,38 @@ class Settings extends Component {
                     </div>
                 ),
                 children: [
+                    {
+                        type: 'child',
+                        component: (
+                            <SettingsToggleItem
+                                key='compact'
+                                text='Compact mode'
+                                icon='icon-view_day'
+                                isToggle={isCompactMode}
+                                onToggleState={() => {
+                                    isCompactMode()
+                                        ? onDeactivateCompactMode()
+                                        : onActivateCompactMode()
+                                }}
+                            />
+                        )
+                    },
+                    {
+                        type: 'child',
+                        component: (
+                            <SettingsToggleItem
+                                key='infinite'
+                                text='Infinite scroll'
+                                icon='icon-infinite'
+                                isToggle={isInfiniteScroll}
+                                onToggleState={() => {
+                                    isInfiniteScroll()
+                                        ? onDeactivateInfiniteScroll()
+                                        : onActivateInfiniteScroll()
+                                }}
+                            />
+                        )
+                    },
                     {
                         type: 'child',
                         component: (
@@ -51,22 +86,6 @@ class Settings extends Component {
                             />
                         )
                     },
-                    {
-                        type: 'child',
-                        component: (
-                            <SettingsToggleItem
-                                key='compact'
-                                text='Compact mode'
-                                icon='icon-view_day'
-                                isToggle={isCompactMode}
-                                onToggleState={() => {
-                                    isCompactMode()
-                                        ? onDeactivateCompactMode()
-                                        : onActivateCompactMode()
-                                }}
-                            />
-                        )
-                    }
                 ]
             }
         ]
