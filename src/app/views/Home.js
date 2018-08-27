@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CardList from '../components/CardList'
+import InfiniteCardList from '../components/InfiniteCardList'
 import Header from '../components/Header'
 
 class Home extends Component {
@@ -24,7 +24,7 @@ class Home extends Component {
 
 		        <div className='container'>
 		        	<div className='container__wrapper'>
-		          		<CardList
+		          		<InfiniteCardList
                             messages={messages}
                             onRemoveMessage={onRemoveMessage}
                         />

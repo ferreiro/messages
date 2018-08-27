@@ -29,10 +29,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-      const { nightMode, compactMode } = this.state
+      const { nightMode, compactMode } = this.state.settings
  
       compactMode && (this.activateCompactMode())
-      nightMode && (this.activateNigthMode())
+      nightMode && (this.activateNightMode())
 
       this.getMessages()
 
@@ -99,7 +99,7 @@ class App extends Component {
     this.setSettingsValue({ nightMode: true })
   }
 
-  deactivateNigthMode = () => {
+  deactivateNightMode = () => {
     this.removeClassFromBody(NIGTH_MODE_CLASSNAME)
     this.setSettingsValue({ nightMode: false })
   }
@@ -176,7 +176,7 @@ class App extends Component {
                             onActivateCompactMode={this.activateCompactMode}
                             onDeactivateCompactMode={this.deactivateCompactMode}
                             onActivateNightMode={this.activateNightMode}
-                            onDeactivateNightMode={this.deactivateNigthMode}
+                            onDeactivateNightMode={this.deactivateNightMode}
                             onActivateInfiniteScroll={this.activateInfiniteScroll}
                             onDeactivateInfiniteScroll={this.deactivateInfiniteScroll}
                         />

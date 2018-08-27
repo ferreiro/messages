@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.4.2",
     "react-hammerjs": "^1.0.1",
     "react-helmet": "^5.2.0",
+    "react-infinite": "^0.13.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "timeago.js": "^3.0.2"

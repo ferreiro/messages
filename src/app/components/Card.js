@@ -31,7 +31,7 @@ class Card extends Component {
 	resize = () => {
 		const { id } = this.props
 		const node = document.getElementById(id)
-		this.updateHeight(node.offsetHeight)
+		node && this.updateHeight(node.offsetHeight)
 	}
 
 	updateHeight = (height) => {
@@ -46,7 +46,7 @@ class Card extends Component {
 	removeCard = () => {
 		const { message, onRemoveMessage } = this.props
 		const removeCard = () => {
-			setTimeout(() => onRemoveMessage(message), 1000)
+			setTimeout(() => onRemoveMessage(message), 2000)
 		}
 		this.setState({ isHidden: true, height: 0 }, removeCard)
 	}

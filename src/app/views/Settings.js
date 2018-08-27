@@ -25,6 +25,60 @@ class Settings extends Component {
             onDeactivateInfiniteScroll,
         } = this.props
 
+        const compactMode =
+            {
+                type: 'child',
+                component: (
+                    <SettingsToggleItem
+                        key='compact'
+                        text='Compact mode'
+                        icon='icon-view_day'
+                        isActivated={settings.compactMode}
+                        onToggleState={() => {
+                            settings.compactMode
+                                ? onDeactivateCompactMode()
+                                : onActivateCompactMode()
+                        }}
+                    />
+                )
+            }
+
+        const infiniteScroll =
+            {
+                type: 'child',
+                component: (
+                    <SettingsToggleItem
+                        key='infinite'
+                        text='Infinite scroll'
+                        icon='icon-infinite'
+                        isActivated={settings.infiniteScroll}
+                        onToggleState={() => {
+                            settings.infiniteScroll
+                                ? onDeactivateInfiniteScroll()
+                                : onActivateInfiniteScroll()
+                        }}
+                    />
+                )
+            }
+
+        const nightMode = 
+            {
+                type: 'child',
+                component: (
+                    <SettingsToggleItem
+                        key='night'
+                        text='Night mode'
+                        icon='icon-brightness_2'
+                        isActivated={settings.nightMode}
+                        onToggleState={() => {
+                            settings.nightMode
+                                ? onDeactivateNightMode()
+                                : onActivateNightMode()
+                        }}
+                    />
+                )
+            }
+
         return [
             {
                 type: 'parent',
@@ -34,54 +88,9 @@ class Settings extends Component {
                     </div>
                 ),
                 children: [
-                    {
-                        type: 'child',
-                        component: (
-                            <SettingsToggleItem
-                                key='compact'
-                                text='Compact mode'
-                                icon='icon-view_day'
-                                isActivated={settings.compactMode}
-                                onToggleState={() => {
-                                    settings.compactMode
-                                        ? onDeactivateCompactMode()
-                                        : onActivateCompactMode()
-                                }}
-                            />
-                        )
-                    },
-                    {
-                        type: 'child',
-                        component: (
-                            <SettingsToggleItem
-                                key='infinite'
-                                text='Infinite scroll'
-                                icon='icon-infinite'
-                                isActivated={settings.infiniteScroll}
-                                onToggleState={() => {
-                                    settings.infiniteScroll
-                                        ? onDeactivateInfiniteScroll()
-                                        : onActivateInfiniteScroll()
-                                }}
-                            />
-                        )
-                    },
-                    {
-                        type: 'child',
-                        component: (
-                            <SettingsToggleItem
-                                key='night'
-                                text='Night mode'
-                                icon='icon-brightness_2'
-                                isActivated={settings.nightMode}
-                                onToggleState={() => {
-                                    settings.nightMode
-                                        ? onDeactivateNightMode()
-                                        : onActivateNightMode()
-                                }}
-                            />
-                        )
-                    },
+                    compactMode,
+                    infiniteScroll,
+                    nightMode,
                 ]
             }
         ]
