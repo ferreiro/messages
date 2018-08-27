@@ -101,9 +101,6 @@ class Card extends Component {
 		const { distance, velocity } = event
 		const { outerWidth } = window
 
-		console.log('Swipping!')
-		console.log(event)
-
 		if (Math.abs(velocity) > 1) {
 			const direction = velocity > 0 ? RIGHT : LEFT
 			this.swipeToEnd({
