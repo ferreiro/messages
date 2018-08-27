@@ -115,7 +115,6 @@ class Card extends Component {
 		const { positionX, height, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
-		console.log(positionX)
 		const cardClassNames = 'card ' + extraCardClassNames
 
 		return (

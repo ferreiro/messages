@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 import Home from './views/Home'
 import Search from './views/Search'
-import Configure from './views/Configure'
+import Settings from './views/Settings'
 import NotFound from './views/NotFound'
 
 import * as MessagesApi from './libs/MessagesApi'
 import '../styles/css/index.css';
 
 const COMPACT_MODE_CLASSNAME = 'compact'
+const NIGTH_MODE_CLASSNAME = 'night'
 
 class App extends Component {
   state = {
     messages: [],
     nextPageToken: null,
-    compactMode: true,
-    nightMode: false,
+    settings: {
+      nightMode: false,
+      compactMode: true,
+    }
   }
 
   componentDidMount() {
@@ -32,9 +35,9 @@ class App extends Component {
       */
   }
 
-  isCompactModeActivated = () => this.state.compactMode
+  isCompactModeActivated = () => this.state.settings.compactMode
 
-  isNightModeActivated = () => this.state.nightMode
+  isNightModeActivated = () => this.state.settings.nightMode
 
   getMessages = () => {
       MessagesApi.get({
@@ -71,28 +74,42 @@ class App extends Component {
     })
   }
 
-  activateNigthMode = () => {
+  addClassToBody = (className) => {
     const body = document.getElementsByTagName('body')[0]
-    body.classList.add('night')
-    this.setState({ nightMode: true })
+    body.classList.add(className)
+  }
+
+  removeClassFromBody = (className) => {
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.remove(className)
+  }
+
+  activateNigthMode = () => {
+    this.addClassToBody(NIGTH_MODE_CLASSNAME)
+    this.setState((prevState) => ({
+      settings: Object.assign(prevState.settings, { nightMode: true })
+    }))
   }
 
   deactivateNigthMode = () => {
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.remove('night')
-    this.setState({ nightMode: false })
+    this.removeClassFromBody(NIGTH_MODE_CLASSNAME)
+    this.setState((prevState) => ({
+      settings: Object.assign(prevState.settings, { nightMode: false })
+    }))
   }
 
   activateCompactMode = () => {
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.add(COMPACT_MODE_CLASSNAME)
-    this.setState({ compactMode: true })
+    this.addClassToBody(COMPACT_MODE_CLASSNAME)
+    this.setState((prevState) => ({
+      settings: Object.assign(prevState.settings, { compactMode: true })
+    }))
   }
 
   deactivateCompactMode = () => {    
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.remove(COMPACT_MODE_CLASSNAME)
-    this.setState({ compactMode: false })
+    this.removeClassFromBody(COMPACT_MODE_CLASSNAME)
+    this.setState((prevState) => ({
+      settings: Object.assign(prevState.settings, { compactMode: false })
+    }))
   }
 
   render() {
@@ -124,27 +141,43 @@ class App extends Component {
               <Route
                   path='/search'
                   exact
-                  render={() => (
+                  render={() => {
+                    return (
                       <Search
                           messages={this.state.messages}
                       />
-                  )}
+                    )
+                  }}
               ></Route>
               <Route
-                  path='/configure'
+                  path='/settings'
                   exact
-                  render={() => (
-                      <Configure
-                          activateCompactMode={this.activateCompactMode}
-                          deactivateCompactMode={this.deactivateCompactMode}
-                      />
-                  )}
+                  render={() => {
+                    const { history } = this.props
+
+                    const goBack = () => history.goBack()
+
+                    return (
+                      <div>
+                        {console.log(this.state)}
+                        <Settings
+                            onGoBack={goBack}
+                            onActivateCompactMode={this.activateCompactMode}
+                            onDeactivateCompactMode={this.deactivateCompactMode}
+                            onActivateNightMode={this.activateNigthMode}
+                            onDeactivateNightMode={this.deactivateNigthMode}
+
+                            isCompactMode={this.isCompactModeActivated}
+                            isNightMode={this.isNightModeActivated}
+                        />
+                      </div>
+                    )
+                  }}
               ></Route>
               <Route
                   path='/'
                   render={() => (
-                      <NotFound
-                      />
+                      <NotFound />
                   )}
               ></Route>
           </Switch>
@@ -153,4 +186,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

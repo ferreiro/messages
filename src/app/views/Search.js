@@ -10,6 +10,7 @@ import SearchResult from '../components/SearchResult'
 class Search extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
+        onGoBack: PropTypes.func.isRequired,
     }
 
     state = {
@@ -98,14 +99,23 @@ class Search extends Component {
         }))
     }
 
-    render() {
+    render () {
+        const { query } = this.state
+        const { onGoBack } = this.props
+        const {
+            onChangeQuery,
+            onClearSearch,
+            onSubmitQuery,
+        } = this
+
         return (
         	<div className="Page">
                 <SearchHeader
-                    query={this.state.query}
-                    onChangeQuery={this.onChangeQuery}
-                    onClearSearch={this.onClearSearch}
-                    onSubmitHandler={this.onSubmitQuery}
+                    query={query}
+                    onChangeQuery={onChangeQuery}
+                    onClearSearch={onClearSearch}
+                    onSubmitHandler={onSubmitQuery}
+                    onGoBack={onGoBack}
                 />
 
                 <div className="container">

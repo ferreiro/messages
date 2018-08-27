@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import CardList from '../components/CardList'
@@ -19,11 +19,11 @@ class Home extends Component {
         } = this.props
 
         return (
-        	<div className="Page">
-	            <Header />
+        	<div className='Page'>
+	            <Header title='Messages' />
 
-		        <div className="container">
-		        	<div className="container__wrapper">
+		        <div className='container'>
+		        	<div className='container__wrapper'>
 		          		<CardList
                             messages={messages}
                             onRemoveMessage={onRemoveMessage}

@@ -34,10 +34,7 @@ class NotFound extends Component {
 
 		        <div className="container">
 		        	<div className="container__wrapper">
-		          		<CardList
-                            messages={messages}
-                            onRemoveMessage={onRemoveMessage}
-                        />
+		          		Not found :(
 		          	</div>
 		        </div>
 	        </div>

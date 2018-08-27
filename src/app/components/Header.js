@@ -4,31 +4,53 @@ import { Link } from 'react-router-dom'
 
 
 class Header extends Component {
-  static propTypes = {}
+  static propTypes = {
+    title: PropTypes.string.isRequired
+  }
+
+  goBack = () => {
+    this.props.goBack()
+  }
 
   render () {
-    const { isCompactMode } = this.props
+    const {
+      title = '',
+      displayGoBack = false,
+      displaySearch = true,
+    } = this.props
+
   	return (
           <header className="header">
             <div className="header__wrapper">
 
-              <Link to='/configure'>
-                <div className="header__burger">
-                  <span className="icon icon-dehaze"></span>
-                </div>
-              </Link>
+              {displayGoBack
+                ? (
+                  <div
+                    className="header__burger"
+                    onClick={this.goBack}
+                  >
+                    <span className="icon icon-arrow_back"></span>
+                  </div>
+                ) : (
+                  <Link to='/settings'>
+                    <div className="header__burger">
+                      <span className="icon icon-dehaze"></span>
+                    </div>
+                  </Link>
+                )}
 
               <div className="header__logo">
-                Messages
+                {title}
               </div>
 
               <ul className="header__options" style={{float: 'right'}}>
-                <Link to='/search'>
-                  <li className="header__item">
-                    <span className="header__searchIcon icon icon-search"></span>
-                  </li>
-                </Link>
-
+                {displaySearch && (
+                  <Link to='/search'>
+                    <li className="header__item">
+                      <span className="header__searchIcon icon icon-search"></span>
+                    </li>
+                  </Link>
+                )}
               </ul>
             </div>
           </header>
