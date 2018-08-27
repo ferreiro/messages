@@ -18,6 +18,10 @@ class App extends Component {
     messages: [],
     nextPageToken: null,
     settings: {
+      user: {
+        name: 'Jorge',
+        bio: 'Software Engineer and entrepreneuri'
+      },
       nightMode: false,
       compactMode: true,
       infiniteScroll: true,
@@ -25,8 +29,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.isCompactModeActivated() && (this.activateCompactMode())
-      this.isNightModeActivated() && (this.activateNigthMode())
+      const { nightMode, compactMode } = this.state
+ 
+      compactMode && (this.activateCompactMode())
+      nightMode && (this.activateNigthMode())
+
       this.getMessages()
 
       /*
@@ -115,12 +122,6 @@ class App extends Component {
     this.setSettingsValue({ infiniteScroll: false })
   }
 
-  isCompactModeActivated = () => this.state.settings.compactMode
-
-  isNightModeActivated = () => this.state.settings.nightMode
-
-  isInfiniteScroll = () => this.state.settings.infiniteScroll
-
   render() {
     const { messages, compactMode } = this.state
 
@@ -171,16 +172,13 @@ class App extends Component {
                         {console.log(this.state)}
                         <Settings
                             onGoBack={goBack}
+                            settings={this.state.settings}
                             onActivateCompactMode={this.activateCompactMode}
                             onDeactivateCompactMode={this.deactivateCompactMode}
                             onActivateNightMode={this.activateNightMode}
                             onDeactivateNightMode={this.deactivateNigthMode}
                             onActivateInfiniteScroll={this.activateInfiniteScroll}
                             onDeactivateInfiniteScroll={this.deactivateInfiniteScroll}
-
-                            isCompactMode={this.isCompactModeActivated}
-                            isNightMode={this.isNightModeActivated}
-                            isInfiniteScroll={this.isInfiniteScroll}
                         />
                       </div>
                     )

@@ -10,7 +10,6 @@ import SearchResult from '../components/SearchResult'
 class Search extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
-        onGoBack: PropTypes.func.isRequired,
     }
 
     state = {
@@ -101,7 +100,6 @@ class Search extends Component {
 
     render () {
         const { query } = this.state
-        const { onGoBack } = this.props
         const {
             onChangeQuery,
             onClearSearch,
@@ -115,7 +113,6 @@ class Search extends Component {
                     onChangeQuery={onChangeQuery}
                     onClearSearch={onClearSearch}
                     onSubmitHandler={onSubmitQuery}
-                    onGoBack={onGoBack}
                 />
 
                 <div className="container">

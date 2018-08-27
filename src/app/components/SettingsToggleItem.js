@@ -10,7 +10,7 @@ class SettingsToggleItem extends Component {
 	}
 
 	render () {
-		const { text, icon, isToggle } = this.props
+		const { text, icon, isActivated } = this.props
 
 		return (
 			<li
@@ -28,7 +28,7 @@ class SettingsToggleItem extends Component {
             	</span>
             	<div className="flexbox">
 					<label className="switch">
-						<input type="checkbox" checked={isToggle()} />
+						<input type="checkbox" checked={isActivated} />
 						<div className="slider round"></div>
 					</label>
             	</div>
@@ -40,7 +40,7 @@ class SettingsToggleItem extends Component {
 SettingsToggleItem.propTypes = {
 	text: PropTypes.string.isRequired,
 	icon: PropTypes.string.isRequired,
-	isToggle: PropTypes.func.isRequired,
+	isActivated: PropTypes.bool.isRequired,
 	onToggleState: PropTypes.func.isRequired,
 }
 

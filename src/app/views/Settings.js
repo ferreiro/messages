@@ -7,20 +7,16 @@ import SettingsToggleItem from '../components/SettingsToggleItem'
 class Settings extends Component {
     static propTypes = {
         onGoBack: PropTypes.func.isRequired,
+        settings: PropTypes.object.isRequired,
         onActivateCompactMode: PropTypes.func.isRequired,
         onDeactivateCompactMode: PropTypes.func.isRequired,
         onActivateNightMode: PropTypes.func.isRequired,
         onDeactivateNightMode: PropTypes.func.isRequired,
-
-        isCompactMode: PropTypes.func.isRequired,
-        isNightMode: PropTypes.func.isRequired,
     }
 
     getSettings = () => {
         const {
-            isNightMode,
-            isCompactMode,
-            isInfiniteScroll,
+            settings,
             onActivateCompactMode,
             onDeactivateCompactMode,
             onActivateNightMode,
@@ -45,9 +41,9 @@ class Settings extends Component {
                                 key='compact'
                                 text='Compact mode'
                                 icon='icon-view_day'
-                                isToggle={isCompactMode}
+                                isActivated={settings.compactMode}
                                 onToggleState={() => {
-                                    isCompactMode()
+                                    settings.compactMode
                                         ? onDeactivateCompactMode()
                                         : onActivateCompactMode()
                                 }}
@@ -61,9 +57,9 @@ class Settings extends Component {
                                 key='infinite'
                                 text='Infinite scroll'
                                 icon='icon-infinite'
-                                isToggle={isInfiniteScroll}
+                                isActivated={settings.infiniteScroll}
                                 onToggleState={() => {
-                                    isInfiniteScroll()
+                                    settings.infiniteScroll
                                         ? onDeactivateInfiniteScroll()
                                         : onActivateInfiniteScroll()
                                 }}
@@ -77,9 +73,9 @@ class Settings extends Component {
                                 key='night'
                                 text='Night mode'
                                 icon='icon-brightness_2'
-                                isToggle={isNightMode}
+                                isActivated={settings.nightMode}
                                 onToggleState={() => {
-                                    isNightMode()
+                                    settings.nightMode
                                         ? onDeactivateNightMode()
                                         : onActivateNightMode()
                                 }}
@@ -92,9 +88,7 @@ class Settings extends Component {
     }
 
     render() {
-        const {
-        	onGoBack,
-        } = this.props
+        const { onGoBack, } = this.props
 
         return (
         	<div className="Page">
@@ -107,17 +101,11 @@ class Settings extends Component {
 
 		        <div className="container">
                     {this.getSettings().map(parent => {
-                        const title = parent.title
-                        const children = (
-                            <div>
-                                {parent.children.map(child => child.component)}
-                            </div>
-                        )
-
+                        const { title, children } = parent
                         return (
                             <div>
                                 {title}
-                                {children}
+                                {<div>{children.map(child => child.component)}</div>}
                             </div>
                         )
                     })}
