@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
 
-import CardList from './components/CardList'
-import Header from './components/Header'
+import CardList from '../components/CardList'
+import Header from '../components/Header'
 
 class Home extends Component {
     static propTypes = {

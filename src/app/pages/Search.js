@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
 
-import SearchHistoryRepository from './libs/SearchHistoryRepository'
+import SearchHistoryRepository from '../libs/SearchHistoryRepository'
 
-import SearchHeader from './components/SearchHeader'
-import SearchHistory from './components/SearchHistory'
-import SearchResult from './components/SearchResult'
+import SearchHeader from '../components/SearchHeader'
+import SearchHistory from '../components/SearchHistory'
+import SearchResult from '../components/SearchResult'
 
 class Search extends Component {
     static propTypes = {

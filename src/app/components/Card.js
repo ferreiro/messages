@@ -112,9 +112,10 @@ class Card extends Component {
 
 	render () {
 		const { message } = this.props
-		const { height, opacity, isHidden, extraCardClassNames } = this.state
+		const { positionX, height, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
+		console.log(positionX)
 		const cardClassNames = 'card ' + extraCardClassNames
 
 		return (
@@ -132,7 +133,11 @@ class Card extends Component {
 						className={cardClassNames}
 						style={{
 							position: 'relative',
-							left: this.state.positionX,
+							'-moz-transform': `translateX(${positionX}px) translateY(0)`,
+							'-webkit-transform': `translateX(${positionX}px) translateY(0)`,
+							'-o-transform': `translateX(${positionX}px) translateY(0)`,
+							'-ms-transform': `translateX(${positionX}px) translateY(0)`,
+							'transform': `translateX(${positionX}px) translateY(0)`,
 							opacity
 						}}
 					>

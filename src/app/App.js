@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
-import Home from './Home'
-import Search from './Search'
+import Home from './pages/Home'
+import Search from './pages/Search'
 import * as MessagesApi from './libs/MessagesApi'
-import './styles/css/index.css';
+import '../styles/css/index.css';
 
 const COMPACT_MODE_CLASSNAME = 'compact'
 
