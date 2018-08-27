@@ -498,8 +498,10 @@ input {
 	.search__history {
 		color: #fff !important;
 		background: #1d2835 !important;
+	}
 
-		&> li { border-bottom: #293646 !important; }
+	.search__history__item {
+		border-bottom: #293646 !important;
 	}
 
 	.search__history__icon, .search__history__text {
@@ -712,6 +714,7 @@ input {
 
 /* The switch - the box around the slider */
 .switch {
+  z-index: 0;
   position: relative;
   display: inline-block;
   width: 50px;
@@ -734,6 +737,7 @@ input {
   -webkit-transition: .3s;
   transition: .3s;
   outline: none !important;
+  z-index: 0;
 }
 
 .slider:before {

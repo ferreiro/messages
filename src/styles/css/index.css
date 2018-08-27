@@ -316,7 +316,7 @@ input {
   color: #fff !important;
   background: #1d2835 !important;
 }
-.night .search__history > li {
+.night .search__history__item {
   border-bottom: #293646 !important;
 }
 .night .search__history__icon, .night .search__history__text {
@@ -542,6 +542,7 @@ input {
 
 /* The switch - the box around the slider */
 .switch {
+  z-index: 0;
   position: relative;
   display: inline-block;
   width: 50px;
@@ -566,6 +567,7 @@ input {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   outline: none !important;
+  z-index: 0;
 }
 
 .slider:before {
