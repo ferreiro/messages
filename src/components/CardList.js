@@ -4,14 +4,16 @@ import PropTypes from 'prop-types'
 import Card from './Card'
 
 function CardList (props) {
-	const { messages } = props
+	const { messages, onRemoveMessage } = props
 
 	return (
 		<div className="cardList">
 			{messages.map(message => (
 				<Card
 					key={message.id}
+					id={message.id}
 					message={message}
+					onRemoveMessage={onRemoveMessage}
 				/>
 			))}
 		</div>
@@ -19,7 +21,8 @@ function CardList (props) {
 }
 
 CardList.propTypes = {
-	messages: PropTypes.array.isRequired
+	messages: PropTypes.array.isRequired,
+	onRemoveMessage: PropTypes.func.isCompactMode,
 }
 
 export default CardList

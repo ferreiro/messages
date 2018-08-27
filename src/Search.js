@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import SearchHistoryRepository from './libs/SearchHistoryRepository'
 
@@ -16,9 +15,7 @@ class Search extends Component {
     state = {
         query: '',
         filteredMessages: [],
-        previousSearches: [
-            // SearchHistoryRepository.create({ query: 'William Shakespeare' })
-        ],
+        previousSearches: [], // SearchHistoryRepository.create({ query: 'William Shakespeare' })
         displaySearchHistory: true,
     }
 

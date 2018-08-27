@@ -162,6 +162,10 @@ input {
   border: 0;
 }
 
+.right {
+  text-align: right;
+}
+
 .flex {
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -189,6 +193,7 @@ input {
 .header {
   top: 0;
   left: 0;
+  z-index: 2;
   padding: 0 1em;
   width: calc(100% - 2em);
   background: #6040b0;
@@ -268,11 +273,18 @@ input {
   padding: 0;
 }
 .compact .container__wrapper {
+  width: 100%;
   padding: 0;
 }
 .compact .card {
   margin: 0;
   border-bottom: 1px solid #e5e5e5;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 .night {
@@ -286,6 +298,19 @@ input {
 .night .header span,
 .night .header__search > input span {
   color: #fff !important;
+}
+.night .header::placeholder,
+.night .header__search > input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+}
+.night .header:-ms-input-placeholder,
+.night .header__search > input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.night .header::-ms-input-placeholder,
+.night .header__search > input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 .night .search__history {
   color: #fff !important;
@@ -303,10 +328,12 @@ input {
 }
 .night .search__notFound__icon {
   background: #526a86;
-  color: rgba(255, 255, 255, 0.9);
+}
+.night .search__notFound__icon > span {
+  color: rgba(255, 255, 255, 0.7);
 }
 .night .search__notFound__text {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
 }
 .night .card {
   background: #1d2835 !important;
@@ -322,12 +349,20 @@ input {
   color: #fff;
 }
 
+.Page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 .container {
   margin-top: 60px;
 }
 
 .container__wrapper {
+  width: calc(100% - 2em);
   padding: 0.4em 1em;
+  overflow-x: hidden;
 }
 
 .search__title {
@@ -412,16 +447,57 @@ input {
   -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+  opacity: 1;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-transition: all 120ms;
-  -moz-transition: all 120ms;
-  -ms-transition: all 120ms;
-  -o-transition: all 120ms;
+  -webkit-transition: all 50ms;
+  -moz-transition: all 50ms;
+  -ms-transition: all 50ms;
+  -o-transition: all 50ms;
+}
+.card__wrapper {
+  height: "auto";
+  position: relative;
+  -webkit-transition: height 500ms ease-out;
+  -moz-transition: height 500ms ease-out;
+  -ms-transition: height 500ms ease-out;
+  -o-transition: height 500ms ease-out;
+}
+.card__wrapper.hide {
+  height: 0;
+}
+.card__background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  content: "";
+  top: 0;
+}
+.card.moving {
+  -webkit-transition: initial;
+  -moz-transition: initial;
+  -ms-transition: initial;
+  -o-transition: initial;
+}
+.card.hiding {
+  opacity: 0;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+}
+.card.restart {
+  -webkit-transition: all 150ms ease;
+  -moz-transition: all 150ms ease;
+  -ms-transition: all 150ms ease;
+  -o-transition: all 150ms ease;
 }
 .card__header {
   margin-bottom: 1em;

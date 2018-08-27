@@ -8,6 +8,7 @@ class Home extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
         onAddMessage: PropTypes.func.isCompactMode,
+        onRemoveMessage: PropTypes.func.isCompactMode,
         isCompactMode: PropTypes.bool.isCompactMode,
         activateCompactMode: PropTypes.func.isRequired,
         deactivateCompactMode: PropTypes.func.isRequired,
@@ -17,6 +18,7 @@ class Home extends Component {
         const {
         	messages,
         	onAddMessage,
+            onRemoveMessage,
         	activateCompactMode,
         	deactivateCompactMode,
         	isCompactMode,
@@ -32,7 +34,10 @@ class Home extends Component {
 
 		        <div className="container">
 		        	<div className="container__wrapper">
-		          		<CardList messages={messages} />
+		          		<CardList
+                            messages={messages}
+                            onRemoveMessage={onRemoveMessage}
+                        />
 		          	</div>
 		        </div>
 	        </div>

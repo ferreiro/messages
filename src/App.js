@@ -29,13 +29,9 @@ class App extends Component {
       */
   }
 
-  isCompactModeActivated = () => {
-    return this.state.compactMode
-  }
+  isCompactModeActivated = () => this.state.compactMode
 
-  isNightModeActivated = () => {
-    return this.state.nightMode
-  }
+  isNightModeActivated = () => this.state.nightMode
 
   getMessages = () => {
       MessagesApi.get({
@@ -57,6 +53,12 @@ class App extends Component {
   addMessage = (message) => {
     this.setState((prevState, props) => ({
       messages: [ ...prevState.messages, message ]
+    }))
+  }
+
+  removeMessage = (message) => {
+    this.setState((prevState, props) => ({
+      messages: prevState.messages.filter(m => m.id !== message.id)
     }))
   }
 
@@ -101,6 +103,7 @@ class App extends Component {
             <meta name="theme-color" content="#522e92" />
 
             <meta charset="UTF-8" />
+            <meta name="msapplication-tap-highlight" content="no" />
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
           </Helmet>
           <Switch>
@@ -112,6 +115,7 @@ class App extends Component {
                           messages={messages}
                           isCompactMode={compactMode}
                           onAddMessage={this.addMessage}
+                          onRemoveMessage={this.removeMessage}
                           activateCompactMode={this.activateCompactMode}
                           deactivateCompactMode={this.deactivateCompactMode}
                       />
