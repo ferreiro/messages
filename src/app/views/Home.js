@@ -7,14 +7,14 @@ import Header from '../components/Header'
 class Home extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
-        onAddMessage: PropTypes.func.isCompactMode,
+        onAddMessages: PropTypes.func.isCompactMode,
         onRemoveMessage: PropTypes.func.isCompactMode,
     }
 
     render() {
         const {
         	messages,
-        	onAddMessage,
+        	onAddMessages,
             onRemoveMessage,
         } = this.props
 
@@ -27,6 +27,7 @@ class Home extends Component {
 		          		<InfiniteCardList
                             messages={messages}
                             onRemoveMessage={onRemoveMessage}
+                            onAddMessages={onAddMessages}
                         />
 		          	</div>
 		        </div>

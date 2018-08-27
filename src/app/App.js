@@ -16,7 +16,6 @@ const NIGTH_MODE_CLASSNAME = 'night'
 class App extends Component {
   state = {
     messages: [],
-    nextPageToken: null,
     settings: {
       user: {
         name: 'Jorge',
@@ -34,7 +33,7 @@ class App extends Component {
       compactMode && (this.activateCompactMode())
       nightMode && (this.activateNightMode())
 
-      this.getMessages()
+      // this.getMessages()
 
       /*
       setInterval(() => {
@@ -51,19 +50,24 @@ class App extends Component {
           .then(response => {
             const { count, pageToken, messages } = response
 
-            messages.forEach(message => {
-              this.addMessage(MessagesApi.toInternalMessage(message))
-            })
+            console.log('getMessages')
+            console.log(messages)
 
+            this.addMessages(messages)
             this.updateNextPageToken(pageToken)
           })
           .catch(err => console.log(err))
   }
 
-  addMessage = (message) => {
+  addMessages = (messages, callback = () => {}) => {
+    const transformedMessages = messages.map(message => {
+      return MessagesApi.toInternalMessage(message)
+    })
     this.setState((prevState, props) => ({
-      messages: [ ...prevState.messages, message ]
-    }))
+      messages: prevState.messages.concat(transformedMessages)
+    }), () => {
+      return callback()
+    })
   }
 
   removeMessage = (message) => {
@@ -143,7 +147,7 @@ class App extends Component {
                   render={() => (
                       <Home
                           messages={messages}
-                          onAddMessage={this.addMessage}
+                          onAddMessages={this.addMessages}
                           onRemoveMessage={this.removeMessage}
                       />
                   )}

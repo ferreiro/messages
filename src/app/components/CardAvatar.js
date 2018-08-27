@@ -6,7 +6,7 @@ function CardAvatar (props) {
 
 	return (
 		<div
-			className="card__avatar"
+			className="card__avatar flexbox"
 			style={{
                 backgroundImage: `url(${avatarUrl})`
             }}

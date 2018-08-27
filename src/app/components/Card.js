@@ -11,7 +11,7 @@ const LEFT = 'LEFT'
 
 class Card extends Component {
 	static propTypes = {
-		id: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired,
 		message: PropTypes.object.isRequired,
 		onRemoveMessage: PropTypes.func.isCompactMode,
 	}
@@ -111,7 +111,7 @@ class Card extends Component {
 	}
 
 	render () {
-		const { message } = this.props
+		const { message, id } = this.props
 		const { positionX, height, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
@@ -128,14 +128,10 @@ class Card extends Component {
 					direction='DIRECTION_HORIZONTAL'
 				>
 					<div
-						id={message.id}
+						id={id}
 						className={cardClassNames}
 						style={{
 							position: 'relative',
-							'-moz-transform': `translateX(${positionX}px) translateY(0)`,
-							'-webkit-transform': `translateX(${positionX}px) translateY(0)`,
-							'-o-transform': `translateX(${positionX}px) translateY(0)`,
-							'-ms-transform': `translateX(${positionX}px) translateY(0)`,
 							'transform': `translateX(${positionX}px) translateY(0)`,
 							opacity
 						}}

@@ -6,20 +6,22 @@ const headers = {
   'Accept': 'application/json',
 }
 
-export const get = (options) =>
+export const get = ({ nextPageToken = '', limit = 10}) =>
+	fetch(`${api}/messages?pageToken=${nextPageToken || '' }&limit=${limit}`, { headers })
+		.then(res => res.json())
+	/*
 	new Promise((resolve, reject) => {
 		resolve(response)
 	})
-
-  	//fetch(`${api}/messages`, { headers })
-	//    .then(res => res.json())
+	*/
 
 // Transform message from API to internal data type
-export const toInternalMessage = (message) =>
-	new Message({
+export const toInternalMessage = (message) => {
+	return new Message({
 		id: message.id,
 		content: message.content,
 		updated: message.updated,
 		authorName: message.author.name,
-	  	avatarUrl: `${api}/${message.author.photoUrl}`
+	  	avatarUrl: `${api}/${message.author.photoUrl}`,
 	})
+}
