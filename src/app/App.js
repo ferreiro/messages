@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import Home from './views/Home'
 import Search from './views/Search'
 import Settings from './views/Settings'
+import Playground from './views/Playground'
 import NotFound from './views/NotFound'
 
 import * as MessagesApi from './libs/MessagesApi'
@@ -188,6 +189,11 @@ class App extends Component {
                     )
                   }}
               ></Route>
+              <Route
+                  path='/playground'
+                  exact
+                  render={() => <Playground />}
+              />
               <Route
                   path='/'
                   render={() => (

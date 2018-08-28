@@ -3,7 +3,7 @@ class ScrollUtils {
 	* Check if item is visible in the screen
 	* https://stackoverflow.com/questions/5353934/check-if-element-is-visible-on-screen
 	*/
-	static checkVisible (element, threshold = 0, mode = 'visible') {
+	static checkVisible (element, threshold = -500, mode = 'visible') {
 		if (!element) {
 			return false
 		}

@@ -19,7 +19,7 @@ class InfiniteCardList extends Component {
 	state = {
 		isLoading: false,
 		nextPageToken: null,
-		limit: 10,
+		limit: 30,
 	}
 
 	loadMoreNode = React.createRef()
@@ -47,9 +47,6 @@ class InfiniteCardList extends Component {
 		this.fetchData()
 			.then(response => {
 				const { messages, pageToken, } = response
-				console.log('pageToken & messages')
-				console.log(pageToken)
-				console.log(messages)
 
 				this.setState({ nextPageToken: pageToken })
 
