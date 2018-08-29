@@ -373,6 +373,10 @@ input {
 .night .placeholder__message {
   background: #41556d;
 }
+.night .animated__background {
+  background: #41556d;
+  background: linear-gradient(to right, #2f3c4e 8%, #263140 18%, #2f3c4e 33%);
+}
 .night input:checked + .slider {
   background-color: #2c5790;
 }

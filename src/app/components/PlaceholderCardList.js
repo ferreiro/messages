@@ -10,8 +10,7 @@ class PlaceholderCardList extends Component {
 	}
 
 	render () {
-		const { count = 1, placeholderHeight } = this.props
-		
+		const { count = 1, placeholderHeight = 'auto' } = this.props
 		return (
 			<div>
 				{Array.from(Array(count).keys()).map((index) => (

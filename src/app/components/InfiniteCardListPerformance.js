@@ -154,12 +154,46 @@ class InfiniteCardListPerformance extends Component {
 	    const width = window.outerWidth
 	    const height = rowHeight * messages.length
 
+	    const loadMoreWithPlaceHoldersAndTrigger = (
+	      	<div
+				id='loadMore'
+				className='loadMoreTrigger'
+				ref={(element) => this.loadMoreElement = element}
+			>
+				<PlaceholderCardList
+					count={1}
+					placeholderHeight={130}
+				/>
+			</div>
+	    )
+
+	    const loadMoreWithButton = (
+  			<div
+  				className='loadMore'
+  				ref={(element) => this.loadMoreElement = element}
+				>
+					{isLoading && (
+						<div style={{marginBottom: '30px'}}>
+							<PlaceholderCardList
+								count={1}
+								placeholderHeight={130}
+							/>
+						</div>
+					)}
+
+      			<button
+      				className='loadMore__button'
+      				onClick={this.onClickLoadMore}
+  				>
+      				Load more
+      			</button>
+  			</div>
+      	)
+
 		return (
 			<div>
 		      	{messages.length === 0 && (
-      				<PlaceholderCardList
-						count={10}
-					/>
+		      		<PlaceholderCardList count={10} />
 	      		)}
 
 			    <List
@@ -172,39 +206,8 @@ class InfiniteCardListPerformance extends Component {
 		      	/>
 
 		      	{isInfiniteScrollActivated === true
-		      		? (
-				      	<div
-							id='loadMore'
-							className='loadMoreTrigger'
-							ref={(element) => this.loadMoreElement = element}
-						>
-							<PlaceholderCardList
-								count={1}
-								placeholderHeight={130}
-							/>
-						</div>
-		      		) : (
-		      			<div
-		      				className='loadMore'
-		      				ref={(element) => this.loadMoreElement = element}
-	      				>
-	      					{isLoading && (
-	      						<div style={{marginBottom: '30px'}}>
-	      							<PlaceholderCardList
-	      								count={1}
-	      								placeholderHeight={130}
-      								/>
-	      						</div>
-	      					)}
-
-			      			<button
-			      				className='loadMore__button'
-			      				onClick={this.onClickLoadMore}
-		      				>
-			      				Load more
-			      			</button>
-		      			</div>
-		      		)
+		      		? loadMoreWithPlaceHoldersAndTrigger
+		      		: loadMoreWithButton
 		      	}
 			</div>
 		)

@@ -22,7 +22,7 @@ class App extends Component {
         name: 'Jorge',
         bio: 'Software Engineer and entrepreneuri'
       },
-      nightMode: false,
+      nightMode: true,
       compactMode: true,
       infiniteScroll: true,
     }
@@ -31,8 +31,8 @@ class App extends Component {
   componentDidMount() {
       const { nightMode, compactMode } = this.state.settings
  
-      compactMode && (this.activateCompactMode())
       nightMode && (this.activateNightMode())
+      compactMode && (this.activateCompactMode())
 
       this.getMessages()
   }
