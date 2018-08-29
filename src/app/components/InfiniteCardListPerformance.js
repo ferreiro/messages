@@ -117,7 +117,7 @@ class InfiniteCardListPerformance extends Component {
 	  isVisible,   // This row is visible within the List (eg it is not an overscanned row)
 	  parent,      // Reference to the parent List (instance)
 	}) => {
-		const { messages } = this.props
+		const { messages, onRemoveMessage } = this.props
 
 		if (!messages || messages.length === 0 || index >= messages.length) {
 			return (<div>borrado</div>)
@@ -131,6 +131,7 @@ class InfiniteCardListPerformance extends Component {
 				key={key}
 				height={rowHeight}
 				message={message}
+				onRemoveMessage={onRemoveMessage}
 			/>
 		)
 	}

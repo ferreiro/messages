@@ -59,6 +59,7 @@ class App extends Component {
   }
 
   removeMessage = (message) => {
+    console.log(message)
     this.setState((prevState, props) => ({
       messages: prevState.messages.filter(m => m.id !== message.id)
     }))
