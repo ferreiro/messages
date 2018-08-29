@@ -1,5 +1,4 @@
 class ScrollUtils {
-
 	/**
 	* Check if a react ref element is in viewport
 	*

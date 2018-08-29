@@ -12,6 +12,13 @@ class SearchHistoryRepository {
 		return newItem
 	}
 
+    static itemsCount () {
+        return (localStorage.hasOwnProperty(PREV_SEARCHES_CACHE)
+            && localStorage[PREV_SEARCHES_CACHE].length)
+            ? localStorage[PREV_SEARCHES_CACHE].length
+            : 0
+    }
+
     static getMaxSearches () {
         return MAX_HISTORY_CACHED
     }
