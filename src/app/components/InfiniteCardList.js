@@ -26,9 +26,14 @@ class InfiniteCardList extends Component {
 	loadMoreElement = null
 
 	componentDidMount () {
-		document.addEventListener('scroll', this.handleScroll)
+		window.addEventListener('scroll', this.handleScroll)
 		this.loadMoreElement = document.getElementById("loadMore")
 		this.loadNextPage()
+	}
+
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
 	}
 
 	fetchData = () => {
@@ -41,7 +46,12 @@ class InfiniteCardList extends Component {
 	}
 
 	loadNextPage = () => {
+		const { isLoading } = this.state
 		const { onAddMessages } = this.props
+
+		if (isLoading) {
+			return;
+		}
 
 		this.setState({ isLoading: true })
 		this.fetchData()

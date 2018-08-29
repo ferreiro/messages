@@ -352,6 +352,28 @@ input {
 	@include flexbox_alignSelf(center);	
 }
 
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated__background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 100%;
+    position: relative;
+}
+
 .placeholder {
 	&__line {
 		width: 100%;
@@ -359,6 +381,7 @@ input {
 		margin: 0.1em 0;
 		background: #e9e9e9;
 		display: inline-block;
+		overflow: hidden;
 
 		@include border-radius(60px);
 	}
@@ -368,6 +391,7 @@ input {
 		margin: 0.1em 0;
 		background: #e9e9e9;
 		display: inline-block;
+		overflow: hidden;
 		@include border-radius(60px);
 	}
 }
@@ -551,6 +575,22 @@ input {
     overflow-x: hidden;
 }
 
+.loadMore {
+	width: 100%;
+	display: block;
+	text-align: center;
+	background: transparent;
+	margin: 2em 0;
+
+	&__button {
+		outline: 0;
+		padding: 1em;
+		display: inline-block;
+		border: 1px solid #cecece;
+		@include border-radius(60px);
+	}
+}
+
 .search {
 	&__title {
 		width: calc(100% - 2em);
@@ -697,6 +737,7 @@ input {
 		display: inline-block;
 		vertical-align: middle;
 		background-size: cover;
+		overflow: hidden;
 		@include border-radius(100%);
 	}
 

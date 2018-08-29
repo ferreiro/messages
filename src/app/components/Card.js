@@ -12,6 +12,7 @@ const LEFT = 'LEFT'
 class Card extends Component {
 	static propTypes = {
 		id: PropTypes.number.isRequired,
+		height: PropTypes.number,
 		message: PropTypes.object.isRequired,
 		onRemoveMessage: PropTypes.func.isCompactMode,
 	}
@@ -111,8 +112,8 @@ class Card extends Component {
 	}
 
 	render () {
-		const { message, id } = this.props
-		const { positionX, height, opacity, isHidden, extraCardClassNames } = this.state
+		const { message, height, id } = this.props
+		const { positionX, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
 		const cardClassNames = 'card ' + extraCardClassNames

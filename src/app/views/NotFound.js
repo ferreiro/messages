@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import Header from '../components/Header'
 
 class NotFound extends Component {
-    static propTypes = {}
-
     render() {
         const {} = this.props
         return (

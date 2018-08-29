@@ -34,30 +34,17 @@ class App extends Component {
       compactMode && (this.activateCompactMode())
       nightMode && (this.activateNightMode())
 
-      // this.getMessages()
-
-      /*
-      setInterval(() => {
-        this.loadInitialMessages()
-      }, 2000)
-      */
+      this.getMessages()
   }
 
   getMessages = () => {
-      MessagesApi.get({
-        limit: 30,
-        pakeToken: '303030',
-      })
+      MessagesApi.get({ limit: null, pakeToken: null })
           .then(response => {
             const { count, pageToken, messages } = response
-
-            console.log('getMessages')
-            console.log(messages)
-
             this.addMessages(messages)
             this.updateNextPageToken(pageToken)
           })
-          .catch(err => console.log(err))
+          .catch(err => [])
   }
 
   addMessages = (messages, callback = () => {}) => {
@@ -148,6 +135,7 @@ class App extends Component {
                   render={() => (
                       <Home
                           messages={messages}
+                          isInfiniteScrollActivated={this.state.settings.infiniteScroll}
                           onAddMessages={this.addMessages}
                           onRemoveMessage={this.removeMessage}
                       />
@@ -192,7 +180,7 @@ class App extends Component {
               <Route
                   path='/playground'
                   exact
-                  render={() => <Playground />}
+                  render={() => <Playground messages={this.state.messages}/>}
               />
               <Route
                   path='/'

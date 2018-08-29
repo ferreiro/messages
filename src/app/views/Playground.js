@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { List } from 'react-virtualized'
 import loremIpsum from 'lorem-ipsum'
 import Header from '../components/Header'
 
@@ -8,9 +9,36 @@ const rowHeight = 50
 const rowWidth = 800
 
 class Playground extends Component {
-	state = {}
+	constructor () {
+		super()
+	}
+	/*
+
+	  renderRow({ index, key, style }) {
+	  	const { messages } = this.props
+	    return (
+	      <div key={key} style={style} className="row">
+	        <div className="image">
+	          <img src={messages[index].image} alt="" />
+	        </div>
+	        <div className="content">
+	          <div>{messages[index].name}</div>
+	          <div>{messages[index].text}</div>
+	        </div>
+	      </div>
+	    );
+	  }
+ 	*/
 
 	render () {
+		return (<div></div>)
+		/*
+		const { messages } = this.props
+
+		const rowWidth = 300
+		const rowHeight = 200
+		const listHeight = rowHeight * messages.length
+
 		return (
 			<div>
 	            <Header
@@ -19,10 +47,19 @@ class Playground extends Component {
 	            />
 				<div className='container'>
 					<div className='container__wrapper'>
+			          <List
+			            width={rowWidth}
+			            height={listHeight}
+			            rowHeight={rowHeight}
+			            rowRenderer={this.renderRow}
+			            rowCount={messages.length}
+			            overscanRowCount={3}
+	            	/>
 					</div>
 				</div>
 			</div>
 		)
+		*/
 	}
 }
 
