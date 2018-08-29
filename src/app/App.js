@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import Menu from './components/Menu'
 
 import Home from './views/Home'
+import Favorite from './views/Favorite'
 import Search from './views/Search'
 import Settings from './views/Settings'
 import NotFound from './views/NotFound'
@@ -17,13 +18,15 @@ const NIGTH_MODE_CLASSNAME = 'night'
 
 class App extends Component {
   state = {
-    isMenuOpen: false,
     messages: [],
+    isMenuOpen: false,
+    user: {
+      name: 'Jorge Ferreiro',
+      bio: 'Software Engineer and entrepreneur',
+      website: 'www.ferreiro.me',
+      avatar: '/photos/jorge_ferreiro.jpg',
+    },
     settings: {
-      user: {
-        name: 'Jorge',
-        bio: 'Software Engineer and entrepreneuri'
-      },
       nightMode: true,
       compactMode: true,
       infiniteScroll: true,
@@ -137,6 +140,7 @@ class App extends Component {
           <Menu
             isOpen={this.state.isMenuOpen}
             onUpdateMenuState={this.updateMenuState}
+            user={this.state.user}
           />
 
           <Switch>
@@ -145,6 +149,19 @@ class App extends Component {
                   exact
                   render={() => (
                       <Home
+                          messages={messages}
+                          onOpenMenu={this.openMenu}
+                          isInfiniteScrollActivated={this.state.settings.infiniteScroll}
+                          onAddMessages={this.addMessages}
+                          onRemoveMessage={this.removeMessage}
+                      />
+                  )}
+              ></Route>
+              <Route
+                  path='/favorite'
+                  exact
+                  render={() => (
+                      <Favorite
                           messages={messages}
                           onOpenMenu={this.openMenu}
                           isInfiniteScrollActivated={this.state.settings.infiniteScroll}

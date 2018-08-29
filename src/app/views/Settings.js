@@ -144,7 +144,7 @@ class Settings extends Component {
             {
                 type: 'parent',
                 title: (
-                    <div className='search__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
+                    <div className='list__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
                         <span className='flexbox__elastic'>Data</span>
                     </div>
                 ),
@@ -155,7 +155,7 @@ class Settings extends Component {
             {
                 type: 'parent',
                 title: (
-                    <div className='search__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
+                    <div className='list__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
                         <span className='flexbox__elastic'>User interface</span>
                     </div>
                 ),

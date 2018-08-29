@@ -127,7 +127,7 @@ class Search extends Component {
                         ? (
                             <div>
 
-                                <div className="search__title flex">
+                                <div className="list__title flex">
                                     <span className="flexbox__elastic">Suggested searches</span>
                                 </div>
                                 <SearchHistory
@@ -136,7 +136,7 @@ class Search extends Component {
                                     onLoadSearchHistoryItem={this.loadSearchHistoryItem}
                                 />
 
-                                <div className="search__title flex">
+                                <div className="list__title flex">
                                     <span className="flexbox__elastic">Previous searches</span>
                                 </div>
 

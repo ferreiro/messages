@@ -19,13 +19,15 @@ class SearchHistoryItem extends Component {
 
 		return (
 			<li
-	            className="search__history__item flex"
+	            className="list__item flex"
 	            onClick={this.handleEvent}
 	        >
-	            <div className="search__history__icon flexbox">
+	            <div className="list__icon flexbox">
 	                <span className={`icon ${icon}`}></span>
 	            </div>
-	            <span className="search__history__text flexbox__elastic">{searchItem.query}</span>
+	            <span className="list__text flexbox__elastic">
+	            	{searchItem.query}
+            	</span>
 	        </li>
 		)
 	}

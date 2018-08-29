@@ -7,7 +7,7 @@ function SearchHistory (props) {
 	const { icon, searches, onLoadSearchHistoryItem } = props
 
 	return (
-	    <ul className="search__history">
+	    <ul className="list">
 	        {searches.map(searchItem => (
 	            <SearchHistoryItem
 	            	key={searchItem.date}

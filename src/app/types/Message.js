@@ -6,6 +6,11 @@ class Message {
 				writable: false,
 			},
 
+			isFavorite: {
+				value: data.isFavorite,
+				writable: true,
+			},
+
 			content: {
 				value: data.content,
 				writable: false,

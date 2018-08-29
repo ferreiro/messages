@@ -12,7 +12,7 @@ function SearchResult (props) {
 			<SearchNotFound />
 		) : (
 			<div>
-            	<div className="search__title flex">
+            	<div className="list__title flex">
                     <span className="flexbox__elastic">Results</span>
                     <span className="flexbox">{messages.length}</span>
                 </div>
