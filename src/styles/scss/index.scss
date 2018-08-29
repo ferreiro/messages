@@ -554,7 +554,13 @@ input {
 	}
 
 	input:checked + .slider {
-	  background-color: #2c5790;
+		background-color: #2c5790;
+	}
+
+	.loadMore__shadow {
+		-webkit-box-shadow: 0px -4px 21px 9px rgba(29, 40, 53, 1);
+		-moz-box-shadow: 0px -4px 21px 9px rgba(29, 40, 53, 1);
+		box-shadow: 0px -4px 21px 9px rgba(29, 40, 53, 1);
 	}
 }
 
@@ -584,7 +590,15 @@ input {
 	display: block;
 	text-align: center;
 	background: transparent;
-	margin: 2em 0;
+	padding: 2em 0;
+	position: relative;
+	z-index: 10;
+
+	&__shadow {
+		-webkit-box-shadow: 0px -8px 35px -3px rgba(0,0,0,0.38);
+		-moz-box-shadow: 0px -8px 35px -3px rgba(0,0,0,0.38);
+		box-shadow: 0px -8px 35px -3px rgba(0,0,0,0.38);
+	}
 
 	&__button {
 		outline: 0;

@@ -5,7 +5,7 @@ const headers = {
   'Accept': 'application/json',
 }
 
-export const get = ({ nextPageToken = '', limit = 10}) =>
+export const get = ({ nextPageToken = '', limit = 10}) => 
 	fetch(`${api}/messages?pageToken=${nextPageToken || '' }&limit=${limit}`, { headers })
 		.then(res => res.json())
 

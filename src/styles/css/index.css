@@ -380,6 +380,11 @@ input {
 .night input:checked + .slider {
   background-color: #2c5790;
 }
+.night .loadMore__shadow {
+  -webkit-box-shadow: 0px -4px 21px 9px #1d2835;
+  -moz-box-shadow: 0px -4px 21px 9px #1d2835;
+  box-shadow: 0px -4px 21px 9px #1d2835;
+}
 
 .line {
   width: 100%;
@@ -407,7 +412,14 @@ input {
   display: block;
   text-align: center;
   background: transparent;
-  margin: 2em 0;
+  padding: 2em 0;
+  position: relative;
+  z-index: 10;
+}
+.loadMore__shadow {
+  -webkit-box-shadow: 0px -8px 35px -3px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px -8px 35px -3px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px -8px 35px -3px rgba(0, 0, 0, 0.38);
 }
 .loadMore__button {
   outline: 0;

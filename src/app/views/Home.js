@@ -28,6 +28,7 @@ class Home extends Component {
 		        	<div className='container__wrapper'>
                         <InfiniteCardListPerformance
                             messages={messages}
+                            loadLimit={30}
                             isInfiniteScrollActivated={isInfiniteScrollActivated}
                             onAddMessages={onAddMessages}
                             onRemoveMessage={onRemoveMessage}

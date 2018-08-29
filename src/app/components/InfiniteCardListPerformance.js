@@ -1,72 +1,110 @@
 import React, { Component } from 'react'
-import { List, AutoSizer, CellMeasurerCache } from 'react-virtualized'
+import { List, AutoSizer, CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
 import PropTypes from 'prop-types'
 
 import * as MessagesApi from '../libs/MessagesApi'
 
 import Card from './Card'
+import LoaderWithPlaceholders from './LoaderWithPlaceholders'
+import LoaderWithButton from './LoaderWithButton'
 import PlaceholderCardList from './PlaceholderCardList'
+
 import ScrollUtils from '../libs/ScrollUtils'
+
+// In this example, average cell width is assumed to be about 100px.
+// This value will be used for the initial `Grid` layout.
+// Cell measurements smaller than 75px should also be rounded up.
+// Height is not dynamic.
+const cache = new CellMeasurerCache({
+  defaultWidth: 100,
+  minWidth: 75,
+  fixedHeight: false,
+})
 
 class InfiniteCardListPerformance extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
+    	loadLimit: PropTypes.number.isRequired,
         onAddMessages: PropTypes.func.isCompactMode,
         onRemoveMessage: PropTypes.func.isCompactMode,
         isInfiniteScrollActivated: PropTypes.bool.isRequired,
     }
 
 	state = {
+		height: 500,
+		rowHeight: 150,
 		isLoading: false,
-		rowHeight: 187,
-		nextPageToken: null
+		nextPageToken: null,
 	}
 
     loadMoreElement = React.createRef()
 
 	componentDidMount () {
-		this.loadMore()
+		this.updateViewportWidth()
+		this.fetchItems()
+
 		window.addEventListener('scroll', this.handleScroll)
+		window.addEventListener('resize', this.handleResize)
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('resize', this.handleResize);
+	}
+
+	updateViewportWidth = () => {
+		this.setState({ width: window.outerWidth })
+	}
+
+	handleResize = () => {
+		this.updateViewportWidth()
 	}
 
 	handleScroll = () => {
-		const { loadMoreElement } = this
+		this.loadMoreAutomatically()
+	}
+
+	loadMoreManually = (event) => {
+		event.preventDefault()
+		this.fetchItems()
+	}
+
+	loadMoreAutomatically = () => {
+		// const { loadMoreElement } = this
 		const { isInfiniteScrollActivated } = this.props
+		const { rowHeight } = this.state
+		const loadMoreElement = document.getElementById('moreMessagesTrigger')
 
 		if (!loadMoreElement) {
-			throw new Error('No loadMore node')
+			// throw new Error('No loadMore node')
+			return
 		}
 
 		const isVisible =
-			ScrollUtils.isElementInViewport(this.loadMoreElement)
+			ScrollUtils.isElementInViewport({ element: loadMoreElement, offset: 12 * rowHeight })
 
 		if (isVisible && isInfiniteScrollActivated && isInfiniteScrollActivated === true) {
-			this.loadMore()
+			this.fetchItems()
 		}
 	}
 
-	onClickLoadMore = (event) => {
-		event.preventDefault()
-		this.loadMore()
-	}
-
-	loadMore = () => {
-		const { isLoading } = this.state
-		const { isInfiniteScrollActivated, onAddMessages } = this.props
-
-		console.log(this.props)
-		console.log(isLoading, isInfiniteScrollActivated, isInfiniteScrollActivated===false)
+	fetchItems = () => {
+		const { isLoading, nextPageToken } = this.state
+		const { loadLimit, onAddMessages } = this.props
+		const fetchDataFromApi = () => {
+			return MessagesApi.get({
+				limit: loadLimit,
+				nextPageToken,
+			})
+		}
 
 		if (isLoading) {
 			return; // don't load
 		}
 
 		this.setState({ isLoading: true })
-		this.fetchData()
+
+		fetchDataFromApi()
 			.then(response => {
 				const { messages, pageToken, } = response
 				onAddMessages(messages, () => {
@@ -82,26 +120,6 @@ class InfiniteCardListPerformance extends Component {
 			})
 	}
 
-	fetchData = () => {
-		const { nextPageToken, limit } = this.state
-
-		return MessagesApi.get({
-			limit,
-			nextPageToken,
-		})
-	}
-
-
-	renderRow = ({ index, key, isScrolling, isVisible }) => {
-		const { messages } = this.props
-
-		if (!messages || messages.length === 0 || index > messages.length) {
-			return (<div>Item not available yet</div>)
-		}
-
-		return (<div>Render item</div>)
-	}
-
 	rowRenderer = ({
 	  index,       // Index of row
 	  key,         // Unique key within array of rendered rows
@@ -111,27 +129,41 @@ class InfiniteCardListPerformance extends Component {
 	  isVisible,   // This row is visible within the List (eg it is not an overscanned row)
 	  parent,      // Reference to the parent List (instance)
 	}) => {
-		const { messages, onRemoveMessage } = this.props
+		const { messages, onRemoveMessage, } = this.props
 
 		if (!messages || messages.length === 0 || index >= messages.length) {
-			return (<div>borrado</div>)
+			return (<div></div>)
 		}
 
-		const { rowHeight } = this.state
 		const message = messages[index]
 
 		return (
-			<Card
+		    <CellMeasurer
 				key={key}
-				height={rowHeight}
-				message={message}
-				onRemoveMessage={onRemoveMessage}
-			/>
+				parent={parent}
+				rowIndex={index}
+				columnIndex={index}
+				cache={cache}
+		    >
+				{({ height, width }) => (
+					<div>
+				      	<Card
+				      		autoHeight
+							key={key}
+							height={height}
+							message={message}
+							style={style}
+							onRemoveMessage={onRemoveMessage}
+						/>
+					</div>
+				)}
+			</CellMeasurer>
 		)
 	}
 
 	render () {
 		const { messages, isInfiniteScrollActivated } = this.props
+		const { width, } = this.state
 
 	    const {
 		      listHeight,
@@ -142,51 +174,14 @@ class InfiniteCardListPerformance extends Component {
 
 		      rowHeight,
 		      isLoading,
+		      bestEffortHeight,
 	    } = this.state;
 
 	    const rowCount = messages.length
-
-	    const width = window.outerWidth
-	    const height = rowHeight * messages.length
-
-	    const loadMoreWithPlaceHoldersAndTrigger = (
-	      	<div
-				id='loadMore'
-				className='loadMoreTrigger'
-				ref={(element) => this.loadMoreElement = element}
-			>
-				<PlaceholderCardList
-					count={1}
-					placeholderHeight={130}
-				/>
-			</div>
-	    )
-
-	    const loadMoreWithButton = (
-  			<div
-  				className='loadMore'
-  				ref={(element) => this.loadMoreElement = element}
-				>
-					{isLoading && (
-						<div style={{marginBottom: '30px'}}>
-							<PlaceholderCardList
-								count={1}
-								placeholderHeight={130}
-							/>
-						</div>
-					)}
-
-      			<button
-      				className='loadMore__button'
-      				onClick={this.onClickLoadMore}
-  				>
-      				Load more
-      			</button>
-  			</div>
-      	)
+	  	const height = rowHeight * messages.length
 
 		return (
-			<div>
+			<div style={{width: '100%'}}>
 		      	{messages.length === 0 && (
 		      		<PlaceholderCardList count={10} />
 	      		)}
@@ -198,12 +193,24 @@ class InfiniteCardListPerformance extends Component {
 					rowRenderer={this.rowRenderer}
 					rowCount={messages.length}
 					overscanRowCount={3}
+					deferredMeasurementCache={cache}
 		      	/>
 
-		      	{isInfiniteScrollActivated === true
-		      		? loadMoreWithPlaceHoldersAndTrigger
-		      		: loadMoreWithButton
-		      	}
+  				<div id='moreMessagesTrigger' ref={(element) => this.loadMoreElement = element}>
+			      	{isInfiniteScrollActivated === true
+			      		? (
+			      			<LoaderWithPlaceholders
+			      				placeholderHeight={130}
+			      				count={1}
+			      		  	/>
+			      		) : (
+			      			<LoaderWithButton
+			      				placeholderHeight={200}
+			      				onLoadMoreManually={this.loadMoreManually}
+			      			/>
+			      		)
+			      	}
+			    </div>
 			</div>
 		)
 	}
