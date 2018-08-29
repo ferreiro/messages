@@ -1,11 +1,9 @@
 import React, { Component } from "react"
-import PropTypes from 'prop-types'
 
 import Header from '../components/Header'
 
 class NotFound extends Component {
     render() {
-        const {} = this.props
         return (
         	<div className="Page">
                 <Header

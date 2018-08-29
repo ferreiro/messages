@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Hammer from 'react-hammerjs'
 
 class PlaceholderCard extends Component {
 	static propTypes = {
@@ -9,10 +8,6 @@ class PlaceholderCard extends Component {
 
 	state = {
 		height: 'auto',
-		isHidden: false,
-		opacity: 1,
-		positionX: 0,
-		extraCardClassNames: ''
 	}
 
 	componentDidMount () {
@@ -30,22 +25,16 @@ class PlaceholderCard extends Component {
 	}
 
 	render () {
-		const { message, height } = this.props
-		const { positionX, opacity, isHidden, extraCardClassNames } = this.state
-		const { handleSwipe, handlePan } = this
-
-		const cardClassNames = 'card ' + extraCardClassNames
+		const { height } = this.props
 
 		return (
 			<div
-				className={'card__wrapper ' + (isHidden ? 'hide' : '')}
+				className={'card__wrapper '}
 			>
 				<div
 					className={'card'}
 					style={{
-						opacity,
 						position: 'relative',
-						transform: `translateX(${positionX}px) translateY(0)`,
 						height: (height === 'auto' ? 'auto' : height + 'px')
 					}}
 				>

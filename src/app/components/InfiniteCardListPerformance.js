@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { List, AutoSizer, CellMeasurerCache } from 'react-virtualized'
 import PropTypes from 'prop-types'
 
@@ -101,11 +100,6 @@ class InfiniteCardListPerformance extends Component {
 		}
 
 		return (<div>Render item</div>)
-	}
-
-
-	constructor(props) {
-	    super(props);
 	}
 
 	rowRenderer = ({

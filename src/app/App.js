@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet'
 import Home from './views/Home'
 import Search from './views/Search'
 import Settings from './views/Settings'
-import Playground from './views/Playground'
 import NotFound from './views/NotFound'
 
 import * as MessagesApi from './libs/MessagesApi'
@@ -40,7 +39,7 @@ class App extends Component {
   getMessages = () => {
       MessagesApi.get({ limit: null, pakeToken: null })
           .then(response => {
-            const { count, pageToken, messages } = response
+            const { pageToken, messages } = response // count, 
             this.addMessages(messages)
             this.updateNextPageToken(pageToken)
           })
@@ -116,7 +115,7 @@ class App extends Component {
   }
 
   render() {
-    const { messages, compactMode } = this.state
+    const { messages, } = this.state // compactMode
 
     return (
       <div className="App">
@@ -178,11 +177,6 @@ class App extends Component {
                     )
                   }}
               ></Route>
-              <Route
-                  path='/playground'
-                  exact
-                  render={() => <Playground messages={this.state.messages}/>}
-              />
               <Route
                   path='/'
                   render={() => (

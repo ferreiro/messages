@@ -58,7 +58,7 @@ class Card extends Component {
 			positionX,
 			extraCardClassNames: className
 		}), () => {
-			callback
+			callback()
 		})
 	}
 
@@ -67,7 +67,7 @@ class Card extends Component {
 			opacity: 0,
 			positionX: direction === RIGHT ? width : -width,
 			className: 'hiding'
-		}, this.removeCard())
+		}, this.removeCard)
 	}
 
 	swipeToBeginning = () => {
@@ -79,7 +79,7 @@ class Card extends Component {
 	}
 
 	handlePan = (event) => {
-		const { deltaX, isFinal, velocityX } = event
+		const { deltaX, isFinal } = event // velocityX
 		const { outerWidth } = window
 		const { positionX } = this.state
 
@@ -99,7 +99,7 @@ class Card extends Component {
 	}
 
 	handleSwipe = (event) => {
-		const { distance, velocity } = event
+		const { velocity } = event // distance, 
 		const { outerWidth } = window
 
 		if (Math.abs(velocity) > 1) {
