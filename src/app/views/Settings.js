@@ -35,7 +35,7 @@ class Settings extends Component {
                     <SettingsActionItem
                         key='compact'
                         text='Clear search history'
-                        icon='icon-view_day'
+                        icon='icon-delete'
                         isActivated={false}
                         requiredConfirmation={true}
                         onActionHandler={() => {

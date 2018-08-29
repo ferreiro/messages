@@ -7,14 +7,16 @@ import Header from '../components/Header'
 class Home extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
+        onOpenMenu: PropTypes.func.isRequired,
         onAddMessages: PropTypes.func.isRequired,
         onRemoveMessage: PropTypes.func.isRequired,
         isInfiniteScrollActivated: PropTypes.bool.isRequired,
     }
 
-    render() {
+    render () {
         const {
         	messages,
+            onOpenMenu,
         	onAddMessages,
             onRemoveMessage,
             isInfiniteScrollActivated
@@ -22,13 +24,16 @@ class Home extends Component {
 
         return (
         	<div className='Page'>
-	            <Header title='Messages' />
+	            <Header
+                    title='Messages'
+                    onOpenMenu={onOpenMenu}
+                />
 
 		        <div className='container'>
 		        	<div className='container__wrapper'>
                         <InfiniteCardListPerformance
-                            messages={messages}
                             loadLimit={20}
+                            messages={messages}
                             isInfiniteScrollActivated={isInfiniteScrollActivated}
                             onAddMessages={onAddMessages}
                             onRemoveMessage={onRemoveMessage}

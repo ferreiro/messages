@@ -8,15 +8,18 @@ function CardList (props) {
 
 	return (
 		<div className="cardList">
-			{messages.map((message, index) => (
-				<Card
-					key={message.id}
-					id={message.id}
-					index={index}
-					message={message}
-					onRemoveMessage={onRemoveMessage}
-				/>
-			))}
+			{messages.map((message, index) => {
+				console.log('index', index)
+				return (
+					<Card
+						key={message.id}
+						id={message.id}
+						index={index}
+						message={message}
+						onRemoveMessage={onRemoveMessage}
+					/>
+				)
+			})}
 		</div>
 	)
 }

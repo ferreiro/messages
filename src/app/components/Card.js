@@ -47,10 +47,8 @@ class Card extends Component {
 
 	removeCard = () => {
 		const { onRemoveMessage, index } = this.props
-		const removeCard = () =>
-			setTimeout(() => onRemoveMessage(index), 1000)
-
-		this.setState({ isHidden: true, height: 0 }, removeCard)
+		onRemoveMessage(index)
+		this.setState({ isHidden: true, height: 0 })
 	}
 
 	swipe = ({ opacity, positionX, className }, callback = () => {}) => {
@@ -68,7 +66,9 @@ class Card extends Component {
 			opacity: 0,
 			positionX: direction === RIGHT ? width : -width,
 			className: 'hiding'
-		}, this.removeCard)
+		}, () => {
+			this.removeCard()
+		})
 	}
 
 	swipeToBeginning = () => {

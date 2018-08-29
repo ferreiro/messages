@@ -9,6 +9,7 @@
     "random-js": "^1.0.8",
     "react": "^16.4.2",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-burger-menu": "^2.5.2",
     "react-dom": "^16.4.2",
     "react-hammerjs": "^1.0.1",
     "react-helmet": "^5.2.0",

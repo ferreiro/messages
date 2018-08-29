@@ -406,7 +406,8 @@ div {
 }
 
 .Page,
-.header__wrapper {
+.header__wrapper,
+.headerSearch__wrapper {
   max-width: 500px;
   margin: 0 auto;
 }

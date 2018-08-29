@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
+import Menu from './components/Menu'
+
 import Home from './views/Home'
 import Search from './views/Search'
 import Settings from './views/Settings'
@@ -15,6 +17,7 @@ const NIGTH_MODE_CLASSNAME = 'night'
 
 class App extends Component {
   state = {
+    isMenuOpen: false,
     messages: [],
     settings: {
       user: {
@@ -51,23 +54,28 @@ class App extends Component {
       return MessagesApi.toInternalMessage(message)
     })
     this.setState((prevState, props) => ({
-      messages: prevState.messages.concat(transformedMessages)
+      messages: [ ...prevState.messages, ...transformedMessages ]
     }), () => {
       return callback()
     })
   }
 
-  removeMessage = (messageIndex) => {
-    this.setState((prevState, props) => ({
-      messages: prevState.messages.filter((item, index) => index !== messageIndex)
+  removeMessage = (index) => {
+    this.setState(({ messages }, props) => ({
+      messages: [...messages.slice(0, index) , ...messages.slice(index + 1, messages.length)]
     }))
   }
 
-  updateNextPageToken = (newToken) => {
-    this.setState({
-      nextPageToken: newToken
-    })
+  openMenu = () => {
+    this.updateMenuState(true)
   }
+
+  updateMenuState = (isMenuOpen) => {
+    this.setState({ isMenuOpen })
+  }
+
+  updateNextPageToken = (newToken) =>
+    this.setState({ nextPageToken: newToken })
 
   addClassToBody = (className) => {
     const body = document.getElementsByTagName('body')[0]
@@ -105,13 +113,11 @@ class App extends Component {
     this.setSettingsValue({ compactMode: false })
   }
 
-  activateInfiniteScroll = () => {
+  activateInfiniteScroll = () =>
     this.setSettingsValue({ infiniteScroll: true })
-  }
 
-  deactivateInfiniteScroll = () => {    
+  deactivateInfiniteScroll = () =>
     this.setSettingsValue({ infiniteScroll: false })
-  }
 
   render() {
     const { messages, } = this.state // compactMode
@@ -127,6 +133,12 @@ class App extends Component {
             <meta name="msapplication-tap-highlight" content="no" />
             <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
           </Helmet>
+
+          <Menu
+            isOpen={this.state.isMenuOpen}
+            onUpdateMenuState={this.updateMenuState}
+          />
+
           <Switch>
               <Route
                   path='/'
@@ -134,6 +146,7 @@ class App extends Component {
                   render={() => (
                       <Home
                           messages={messages}
+                          onOpenMenu={this.openMenu}
                           isInfiniteScrollActivated={this.state.settings.infiniteScroll}
                           onAddMessages={this.addMessages}
                           onRemoveMessage={this.removeMessage}

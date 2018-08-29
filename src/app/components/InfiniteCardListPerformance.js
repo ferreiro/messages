@@ -51,8 +51,8 @@ class InfiniteCardListPerformance extends Component {
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
-		window.removeEventListener('resize', this.handleResize);
+		window.removeEventListener('scroll', this.handleScroll)
+		window.removeEventListener('resize', this.handleResize)
 	}
 
 	getViewportWidth = () => {
@@ -68,9 +68,8 @@ class InfiniteCardListPerformance extends Component {
 	handleResize = () =>
 		this.updateViewportWidth()
 
-	handleScroll = () => {
+	handleScroll = () =>
 		this.loadMoreAutomatically()
-	}
 
 	loadMoreManually = (event) => {
 		event.preventDefault()
@@ -111,7 +110,6 @@ class InfiniteCardListPerformance extends Component {
 		}
 
 		this.setState({ isLoading: true })
-
 		fetchDataFromApi()
 			.then(response => {
 				const { messages, pageToken, } = response
@@ -158,6 +156,7 @@ class InfiniteCardListPerformance extends Component {
 				      	<Card
 				      		autoHeight
 							key={key}
+							index={index}
 							height={height}
 							message={message}
 							style={style}
@@ -188,6 +187,8 @@ class InfiniteCardListPerformance extends Component {
 	    const totalWidth = Math.max(width, this.getViewportWidth())
 	    const rowCount = messages.length
 	  	const height = rowHeight * messages.length
+
+	  	{messages && messages.length < 5 ? this.fetchItems() : ''}
 
 		return (
 			<div style={{width: '100%'}}>
@@ -226,8 +227,3 @@ class InfiniteCardListPerformance extends Component {
 }
 
 export default InfiniteCardListPerformance
-
-// rowHeight={ useDynamicRowHeight ? this._getRowHeight : listRowHeight }
-// 			className={styles.List}
-// 			overscanRowCount={overscanRowCount}
-// 			noRowsRenderer={this._noRowsRenderer}
