@@ -8,10 +8,11 @@ function CardList (props) {
 
 	return (
 		<div className="cardList">
-			{messages.map(message => (
+			{messages.map((message, index) => (
 				<Card
 					key={message.id}
 					id={message.id}
+					index={index}
 					message={message}
 					onRemoveMessage={onRemoveMessage}
 				/>

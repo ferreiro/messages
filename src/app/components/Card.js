@@ -12,6 +12,7 @@ const LEFT = 'LEFT'
 class Card extends Component {
 	static propTypes = {
 		id: PropTypes.number.isRequired,
+		index: PropTypes.number.isRequired,
 		height: PropTypes.number,
 		message: PropTypes.object.isRequired,
 		onRemoveMessage: PropTypes.func.isCompactMode,
@@ -45,10 +46,10 @@ class Card extends Component {
 	}
 
 	removeCard = () => {
-		const { message, onRemoveMessage } = this.props
-		const removeCard = () => {
-			setTimeout(() => onRemoveMessage(message), 2000)
-		}
+		const { onRemoveMessage, index } = this.props
+		const removeCard = () =>
+			setTimeout(() => onRemoveMessage(index), 1000)
+
 		this.setState({ isHidden: true, height: 0 }, removeCard)
 	}
 

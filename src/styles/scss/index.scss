@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?qlvoyx');
-  src:  url('../fonts/icomoon.eot?qlvoyx#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?qlvoyx') format('truetype'),
-    url('../fonts/icomoon.woff?qlvoyx') format('woff'),
-    url('../fonts/icomoon.svg?qlvoyx#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?8j6638');
+  src:  url('../fonts/icomoon.eot?8j6638#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?8j6638') format('truetype'),
+    url('../fonts/icomoon.woff?8j6638') format('woff'),
+    url('../fonts/icomoon.svg?8j6638#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,17 +30,11 @@
 .icon-infinite:before {
   content: "\eb3d";
 }
-.icon-apps:before {
-  content: "\e5c3";
-}
 .icon-archive:before {
   content: "\e149";
 }
 .icon-arrow_back:before {
   content: "\e5c4";
-}
-.icon-arrow_downward:before {
-  content: "\e5db";
 }
 .icon-brightness_2:before {
   content: "\e3a7";
@@ -60,6 +54,9 @@
 .icon-dehaze:before {
   content: "\e3c7";
 }
+.icon-delete:before {
+  content: "\e872";
+}
 .icon-drafts:before {
   content: "\e151";
 }
@@ -68,6 +65,9 @@
 }
 .icon-favorite_border:before {
   content: "\e87e";
+}
+.icon-flash_on:before {
+  content: "\e3e7";
 }
 .icon-star:before {
   content: "\e838";
@@ -93,6 +93,10 @@
 .icon-view_day:before {
   content: "\e8ed";
 }
+.icon-whatshot:before {
+  content: "\e80e";
+}
+
 
 // Source: https://css-tricks.com/snippets/css/useful-css3-less-mixins/
 
@@ -479,6 +483,10 @@ input {
 	}
 }
 
+div {
+	outline: 0
+}
+
 // Compact mode
 .compact {
 	.container {
@@ -486,7 +494,7 @@ input {
 	}
 	.container__wrapper {
 		width: 100%;
-		padding: 0;
+		margin: 0;
 	}
 
 	.card__background {
@@ -575,13 +583,19 @@ input {
 	position: relative;
 }
 
+.Page,
+.header__wrapper {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
 .container {
 	margin-top: 59px;
 }
 
 .container__wrapper {
 	width: calc(100% - 2em);
-	padding: 0.4em 1em;
+	margin: 0.4em 1em;
     overflow-x: hidden;
 }
 

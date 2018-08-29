@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class SearchHistoryItem extends Component {
+	propTypes = {
+		icon: PropTypes.string.isRequired,
+		onLoadSearchHistoryItem: PropTypes.func.isRequired,
+	}
+
 	handleEvent = (event) => {
 		event.preventDefault()
 
@@ -10,7 +15,7 @@ class SearchHistoryItem extends Component {
 	}
 
 	render () {
-		const { searchItem } = this.props
+		const { searchItem, icon = 'icon-update' } = this.props
 
 		return (
 			<li
@@ -18,16 +23,12 @@ class SearchHistoryItem extends Component {
 	            onClick={this.handleEvent}
 	        >
 	            <div className="search__history__icon flexbox">
-	                <span className="icon icon-update"></span>
+	                <span className={`icon ${icon}`}></span>
 	            </div>
 	            <span className="search__history__text flexbox__elastic">{searchItem.query}</span>
 	        </li>
 		)
 	}
-}
-
-SearchHistoryItem.propTypes = {
-	onLoadSearchHistoryItem: PropTypes.func.isRequired
 }
 
 export default SearchHistoryItem

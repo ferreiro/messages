@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class SettingsToggleItem extends Component {
+class SettingsActionItem extends Component {
 	propTypes = {
 		text: PropTypes.string.isRequired,
 		icon: PropTypes.string.isRequired,
-		isActivated: PropTypes.bool.isRequired,
-		onToggleState: PropTypes.func.isRequired,
+		onActionHandler: PropTypes.func.isRequired,
+		requiredConfirmation: PropTypes.bool,
 	}
 
 	handleClickEvent = (event) => {
-		const { onToggleState } = this.props
+		const { onActionHandler } = this.props
 
 		event.preventDefault()
-		onToggleState()
+		onActionHandler()
 	}
 
 	render () {
-		const { text, icon, isActivated } = this.props
+		const { text, icon, } = this.props
 
 		return (
 			<li
@@ -33,16 +33,10 @@ class SettingsToggleItem extends Component {
 	            <span className="search__history__text flexbox__elastic">
 	            	{text}
             	</span>
-            	<div className="flexbox">
-					<label className="switch">
-						<input type="checkbox" checked={isActivated} />
-						<div className="slider round"></div>
-					</label>
-            	</div>
 	        </li>
 		)
 	}
 }
 
-export default SettingsToggleItem
+export default SettingsActionItem
 

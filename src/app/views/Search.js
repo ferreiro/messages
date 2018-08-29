@@ -15,7 +15,12 @@ class Search extends Component {
     state = {
         query: '',
         filteredMessages: [],
-        previousSearches: [], // SearchHistoryRepository.create({ query: 'William Shakespeare' })
+        suggestedSearches: [
+            SearchHistoryRepository.create({ query: 'Lewis Carroll' }),
+            SearchHistoryRepository.create({ query: 'Come away, my dears' }),
+            SearchHistoryRepository.create({ query: 'William Shakespeare' }),
+        ],
+        previousSearches: [], 
         displaySearchHistory: true,
     }
 
@@ -88,6 +93,8 @@ class Search extends Component {
             query, date: new Date()
         })
 
+        SearchHistoryRepository.addQuery(historyQuery)
+
         const updateHistorySearches = (prevState) => {
             const newSearches = [ historyQuery, ...prevState.previousSearches]
             return newSearches.slice(0, SearchHistoryRepository.getMaxSearches())
@@ -118,10 +125,31 @@ class Search extends Component {
                 <div className="container">
                     {this.state.displaySearchHistory === true
                         ? (
-                            <SearchHistory
-                                previousSearches={this.state.previousSearches}
-                                onLoadSearchHistoryItem={this.loadSearchHistoryItem}
-                            />
+                            <div>
+
+                                <div className="search__title flex">
+                                    <span className="flexbox__elastic">Suggested searches</span>
+                                </div>
+                                <SearchHistory
+                                    icon='icon-star_border'
+                                    searches={this.state.suggestedSearches}
+                                    onLoadSearchHistoryItem={this.loadSearchHistoryItem}
+                                />
+
+                                <div className="search__title flex">
+                                    <span className="flexbox__elastic">Previous searches</span>
+                                </div>
+
+                                <SearchHistory
+                                    icon='icon-update'
+                                    searches={this.state.previousSearches}
+                                    onLoadSearchHistoryItem={this.loadSearchHistoryItem}
+                                />
+
+                                {this.state.previousSearches.length === 0 && (
+                                    <p style={{ margin: '1em' }}>No previous search saved!<br /> Your next queries will be stored here :)</p>
+                                )}
+                            </div>
                         ) : (
                             <SearchResult
                                 messages={this.state.filteredMessages}

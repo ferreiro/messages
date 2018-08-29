@@ -45,6 +45,9 @@ class InfiniteCardListPerformance extends Component {
 
 		window.addEventListener('scroll', this.handleScroll)
 		window.addEventListener('resize', this.handleResize)
+
+		// Readjust width
+		setTimeout(() => this.updateViewportWidth(), 100)
 	}
 
 	componentWillUnmount() {
@@ -52,13 +55,18 @@ class InfiniteCardListPerformance extends Component {
 		window.removeEventListener('resize', this.handleResize);
 	}
 
-	updateViewportWidth = () => {
-		this.setState({ width: window.outerWidth })
+	getViewportWidth = () => {
+		const wrapper = document.getElementsByClassName('container__wrapper')
+		return !wrapper || wrapper.length === 0
+			? window.outerWidth
+			: wrapper[0].offsetWidth
 	}
 
-	handleResize = () => {
+	updateViewportWidth = () =>
+		this.setState({ width: this.getViewportWidth() })
+
+	handleResize = () =>
 		this.updateViewportWidth()
-	}
 
 	handleScroll = () => {
 		this.loadMoreAutomatically()
@@ -177,6 +185,7 @@ class InfiniteCardListPerformance extends Component {
 		      bestEffortHeight,
 	    } = this.state;
 
+	    const totalWidth = Math.max(width, this.getViewportWidth())
 	    const rowCount = messages.length
 	  	const height = rowHeight * messages.length
 

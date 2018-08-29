@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import Header from '../components/Header'
 import SettingsToggleItem from '../components/SettingsToggleItem'
+import SettingsActionItem from '../components/SettingsActionItem'
+import SearchHistoryRepository from '../libs/SearchHistoryRepository'
 
 class Settings extends Component {
     static propTypes = {
@@ -23,7 +25,25 @@ class Settings extends Component {
             onDeactivateNightMode,
             onActivateInfiniteScroll,
             onDeactivateInfiniteScroll,
+            onClearSearchHistory,
         } = this.props
+
+        const clearSearchHistory =
+            {
+                type: 'child',
+                component: (
+                    <SettingsActionItem
+                        key='compact'
+                        text='Clear search history'
+                        icon='icon-view_day'
+                        isActivated={false}
+                        requiredConfirmation={true}
+                        onActionHandler={() => {
+                            SearchHistoryRepository.clearQueries()
+                        }}
+                    />
+                )
+            }
 
         const compactMode =
             {
@@ -84,6 +104,17 @@ class Settings extends Component {
                 type: 'parent',
                 title: (
                     <div className="search__title flex" style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
+                        <span className="flexbox__elastic">Data</span>
+                    </div>
+                ),
+                children: [
+                    clearSearchHistory,
+                ]
+            },
+            {
+                type: 'parent',
+                title: (
+                    <div className="search__title flex" style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
                         <span className="flexbox__elastic">User interface</span>
                     </div>
                 ),
@@ -114,7 +145,7 @@ class Settings extends Component {
                         return (
                             <div>
                                 {title}
-                                {<div>{children.map(child => child.component)}</div>}
+                                {<div>{children.map((child, index) => child.component)}</div>}
                             </div>
                         )
                     })}

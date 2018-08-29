@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 import SearchHistoryItem from './SearchHistoryItem'
 
 function SearchHistory (props) {
-	const { previousSearches, onLoadSearchHistoryItem } = props
+	const { icon, searches, onLoadSearchHistoryItem } = props
 
 	return (
 	    <ul className="search__history">
-	        {previousSearches.map(searchItem => (
+	        {searches.map(searchItem => (
 	            <SearchHistoryItem
 	            	key={searchItem.date}
+	            	icon={icon}
 	            	searchItem={searchItem}
 	            	onLoadSearchHistoryItem={onLoadSearchHistoryItem}
 	            />
@@ -20,6 +21,7 @@ function SearchHistory (props) {
 }
 
 SearchHistory.propTypes = {
+	icon: PropTypes.string.isRequired,
 	previousSearches: PropTypes.array.isRequired,
 	onLoadSearchHistoryItem: PropTypes.func.isRequired,
 }

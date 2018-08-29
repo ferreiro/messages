@@ -9,9 +9,6 @@ class SearchHistoryRepository {
 			query: data.query,
 			date: data.date
 		})
-
-		SearchHistoryRepository.addQuery(newItem)
-
 		return newItem
 	}
 
@@ -41,6 +38,13 @@ class SearchHistoryRepository {
         }
         return cachedQueries.slice(0, MAX_HISTORY_CACHED)
 	}
+
+    static clearQueries = () => {
+        if (localStorage.hasOwnProperty(PREV_SEARCHES_CACHE)) {
+            delete localStorage[PREV_SEARCHES_CACHE]
+        }
+    }
+
 }
 
 export default SearchHistoryRepository
