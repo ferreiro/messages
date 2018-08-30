@@ -10,6 +10,8 @@ import SearchResult from '../components/SearchResult'
 class Search extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
+        onRemoveMessage: PropTypes.func.isRequired,
+        onFavoriteMessage: PropTypes.func.isRequired,
     }
 
     state = {
@@ -153,6 +155,8 @@ class Search extends Component {
                         ) : (
                             <SearchResult
                                 messages={this.state.filteredMessages}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                onFavoriteMessage={this.props.onFavoriteMessage}
                             />
                         )
                     }

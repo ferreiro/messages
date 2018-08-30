@@ -411,6 +411,10 @@ div {
   box-shadow: 0px -4px 21px 9px #1d2835;
 }
 
+.react-confirm-alert-body {
+  width: auto;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   display: none !important;

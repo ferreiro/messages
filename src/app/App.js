@@ -199,6 +199,8 @@ class App extends Component {
                     return (
                       <Search
                           messages={this.state.messages}
+                          onRemoveMessage={this.removeMessage}
+                          onFavoriteMessage={this.favoriteMessage}
                       />
                     )
                   }}
