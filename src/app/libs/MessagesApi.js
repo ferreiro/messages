@@ -1,6 +1,6 @@
 import Message from '../types/Message'
 
-const api = "http://message-list.appspot.com/"
+const api = "//message-list.appspot.com/"
 const headers = {
   'Accept': 'application/json',
 }
