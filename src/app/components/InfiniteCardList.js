@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { List, AutoSizer, CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
 import PropTypes from 'prop-types'
-
+import { confirmAlert } from 'react-confirm-alert'
 import * as MessagesApi from '../libs/MessagesApi'
 
 import Card from './Card'
@@ -122,8 +122,25 @@ class InfiniteCardList extends Component {
 				})
 			})
 			.catch(err => {
-				console.log(err)
-				this.setState({ isLoading: false })
+				const alertNodes = document.getElementsByClassName('react-confirm-alert')
+				if (alertNodes.length === 0) {
+					confirmAlert({
+						title: 'Error loading the data',
+						message: 'Hi! We had an error while processing your request and we\'ll'
+								+ 'try in a few seconds again. If the error persist, please'
+								+ ' reach out to me: jorge@ferreiro.me',
+						buttons: [
+						    {
+						      label: 'Retry, thanks!',
+						      onClick: () => console.log('closed')
+						    },
+						]
+					})
+				}
+
+				setTimeout(() => {
+					this.setState({ isLoading: false })	
+				}, 72000)
 			})
 	}
 

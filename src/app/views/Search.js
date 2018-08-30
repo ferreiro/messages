@@ -149,7 +149,7 @@ class Search extends Component {
                                 />
 
                                 {this.state.previousSearches.length === 0 && (
-                                    <p style={{ margin: '1em' }}>No previous search saved!<br /> Your next queries will be stored here :)</p>
+                                    <p className='search__noResults'>No previous search saved!<br /> Your next queries will be stored here :)</p>
                                 )}
                             </div>
                         ) : (

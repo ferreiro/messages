@@ -564,6 +564,8 @@ div {
 		}
 	}
 
+	.search__noResults { color: rgba(255, 255, 255, 0.6); }
+
 	.placeholder__line,
 	.placeholder__message {
 		background: #41556d;
@@ -586,6 +588,7 @@ div {
 
 .react-confirm-alert-body {
 	width: auto;
+	max-width: 350px;
 }
 
 /* Position and sizing of burger button */
@@ -743,6 +746,14 @@ div {
 		display: inline-block;
 		border: 2px solid #6040b0;
 		@include border-radius(5px);
+	}
+}
+
+.search {
+	&__noResults {
+		margin: 1em;
+		line-height: 22px;
+		color: rgba(0, 0, 0, 0.6);
 	}
 }
 

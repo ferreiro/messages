@@ -394,6 +394,9 @@ div {
   background: rgba(19, 74, 117, 0.2);
   color: rgba(255, 255, 255, 0.8);
 }
+.night .search__noResults {
+  color: rgba(255, 255, 255, 0.6);
+}
 .night .placeholder__line,
 .night .placeholder__message {
   background: #41556d;
@@ -413,6 +416,7 @@ div {
 
 .react-confirm-alert-body {
   width: auto;
+  max-width: 350px;
 }
 
 /* Position and sizing of burger button */
@@ -584,6 +588,12 @@ div {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+}
+
+.search__noResults {
+  margin: 1em;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .list {
