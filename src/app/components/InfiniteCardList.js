@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, AutoSizer, CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
+import { List, CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
 import PropTypes from 'prop-types'
 import { confirmAlert } from 'react-confirm-alert'
 import * as MessagesApi from '../libs/MessagesApi'
@@ -32,6 +32,7 @@ class InfiniteCardList extends Component {
     }
 
 	state = {
+		width: 'auto',
 		height: 500,
 		rowHeight: 150,
 		isLoading: false,
@@ -109,6 +110,8 @@ class InfiniteCardList extends Component {
 		if (isLoading) {
 			return // don't load
 		}
+
+		console.log(fetchDataFromApi)
 
 		this.setState({ isLoading: true })
 		fetchDataFromApi()
@@ -190,29 +193,18 @@ class InfiniteCardList extends Component {
 
 	render () {
 		const { messages, isInfiniteScrollActivated } = this.props
-		const { width, } = this.state
+		const { width, rowHeight } = this.state
 
-	    const {
-		      listHeight,
-		      overscanRowCount,
-		      scrollToIndex,
-		      showScrollingPlaceholder,
-		      useDynamicRowHeight,
-
-		      rowHeight,
-		      isLoading,
-		      bestEffortHeight,
-	    } = this.state;
-
-	    const totalWidth = Math.max(width, this.getViewportWidth())
 	    const rowCount = messages.length
-	  	const height = rowHeight * messages.length
+	  	const height = rowHeight * rowCount
 
-	  	{messages && messages.length < 5 ? this.fetchItems() : ''}
+	  	if (messages !== undefined && rowCount < 5) {
+	  		this.fetchItems()	
+	  	}
 
 		return (
 			<div style={{width: '100%'}}>
-		      	{messages.length === 0 && (
+		      	{rowCount === 0 && (
 		      		<PlaceholderCardList count={10} />
 	      		)}
 
@@ -221,7 +213,7 @@ class InfiniteCardList extends Component {
 					height={height}
 					rowHeight={rowHeight}
 					rowRenderer={this.rowRenderer}
-					rowCount={messages.length}
+					rowCount={rowCount}
 					overscanRowCount={3}
 					deferredMeasurementCache={cache}
 		      	/>

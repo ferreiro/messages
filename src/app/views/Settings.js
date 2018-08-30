@@ -13,7 +13,7 @@ class Settings extends Component {
         isClearSearchHistoryDisabled: SearchHistoryRepository.itemsCount() === 0,
     }
 
-    static propTypes = {
+    propTypes = {
         onGoBack: PropTypes.func.isRequired,
         settings: PropTypes.object.isRequired,
         onActivateCompactMode: PropTypes.func.isRequired,
@@ -31,7 +31,6 @@ class Settings extends Component {
             onDeactivateNightMode,
             onActivateInfiniteScroll,
             onDeactivateInfiniteScroll,
-            onClearSearchHistory,
         } = this.props
 
         const {
@@ -40,6 +39,7 @@ class Settings extends Component {
 
         const clearSearchHistory =
             {
+                id: 'searchHistory',
                 type: 'child',
                 component: (
                     <SettingsActionItem
@@ -88,6 +88,7 @@ class Settings extends Component {
 
         const compactMode =
             {
+                id: 'compactMode',
                 type: 'child',
                 component: (
                     <SettingsToggleItem
@@ -106,6 +107,7 @@ class Settings extends Component {
 
         const infiniteScroll =
             {
+                id: 'infiniteScroll',
                 type: 'child',
                 component: (
                     <SettingsToggleItem
@@ -124,6 +126,7 @@ class Settings extends Component {
 
         const nightMode = 
             {
+                id: 'nightMode',
                 type: 'child',
                 component: (
                     <SettingsToggleItem
@@ -142,6 +145,7 @@ class Settings extends Component {
 
         return [
             {
+                id: 'search',
                 type: 'parent',
                 title: (
                     <div className='list__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
@@ -153,6 +157,7 @@ class Settings extends Component {
                 ]
             },
             {
+                id: 'userInterface',
                 type: 'parent',
                 title: (
                     <div className='list__title flex' style={{width: 'calc(100% - 3em)', padding: '1em 1.5em', color: 'rgba(255, 255, 255, 0.7)', background:'#503396'}}>
@@ -184,7 +189,7 @@ class Settings extends Component {
                     {this.getSettings().map(parent => {
                         const { title, children } = parent
                         return (
-                            <div>
+                            <div key={parent.id}>
                                 {title}
                                 {<div>{children.map((child, index) => child.component)}</div>}
                             </div>

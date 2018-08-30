@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
-import { List, AutoSizer, CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
+import { CellMeasurer, CellMeasurerCache, } from 'react-virtualized'
 import PropTypes from 'prop-types'
 
-import * as MessagesApi from '../libs/MessagesApi'
-
 import Card from './Card'
-import LoaderWithPlaceholders from './LoaderWithPlaceholders'
-import LoaderWithButton from './LoaderWithButton'
-import PlaceholderCardList from './PlaceholderCardList'
-
-import ScrollUtils from '../libs/ScrollUtils'
 
 // In this example, average cell width is assumed to be about 100px.
 // This value will be used for the initial `Grid` layout.
@@ -77,11 +70,6 @@ class ListEfficient extends Component {
 		}
 
 		const message = messages[index]
-		console.log('rowRenderer')
-		console.log(messages)
-		console.log(index)
-		console.log(message)
-
 		return (
 		    <CellMeasurer
 				key={key}
@@ -109,33 +97,18 @@ class ListEfficient extends Component {
 
 	render () {
 		const { messages, noItemsComponent, onRemoveMessage, onFavoriteMessage } = this.props
-		const { width, } = this.state
-
-	    const {
-		      listHeight,
-		      overscanRowCount,
-		      scrollToIndex,
-		      showScrollingPlaceholder,
-		      useDynamicRowHeight,
-
-		      rowHeight,
-		      isLoading,
-	    } = this.state;
-
-	    const totalWidth = Math.max(width, this.getViewportWidth())
 	    const rowCount = messages.length
-	  	const height = rowHeight * messages.length
 
 		return (
 			<div style={{width: '100%'}}>
-		      	{messages.length === 0 && (
+		      	{rowCount === 0 && (
 		      		noItemsComponent
 	      		)}
 
 	      		{messages.map(message => (
 			      	<Card
 						key={message.id}
-						height={'auto'}
+						height={this.state.rowHeight}
 						message={message}
 						onFavoriteMessage={onFavoriteMessage}
 						onRemoveMessage={onRemoveMessage}

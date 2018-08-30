@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?8j6638');
-  src:  url('../fonts/icomoon.eot?8j6638#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?8j6638') format('truetype'),
-    url('../fonts/icomoon.woff?8j6638') format('woff'),
-    url('../fonts/icomoon.svg?8j6638#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?khhbrx');
+  src:  url('../fonts/icomoon.eot?khhbrx#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?khhbrx') format('truetype'),
+    url('../fonts/icomoon.woff?khhbrx') format('woff'),
+    url('../fonts/icomoon.svg?khhbrx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -51,50 +51,41 @@
 .icon-mode_edit:before {
   content: "\e254";
 }
+.icon-dashboard:before {
+  content: "\e871";
+}
 .icon-dehaze:before {
   content: "\e3c7";
 }
 .icon-delete:before {
   content: "\e872";
 }
-.icon-drafts:before {
-  content: "\e151";
-}
-.icon-favorite:before {
-  content: "\e87d";
-}
-.icon-favorite_border:before {
-  content: "\e87e";
-}
-.icon-flash_on:before {
-  content: "\e3e7";
+.icon-delete_forever:before {
+  content: "\e92b";
 }
 .icon-star:before {
   content: "\e838";
 }
-.icon-menu:before {
-  content: "\e5d2";
-}
-.icon-person:before {
-  content: "\e7fd";
-}
-.icon-person_pin:before {
-  content: "\e55a";
+.icon-message:before {
+  content: "\e0c9";
 }
 .icon-search:before {
   content: "\e8b6";
 }
+.icon-settings:before {
+  content: "\e8b8";
+}
 .icon-star_border:before {
   content: "\e83a";
+}
+.icon-storage:before {
+  content: "\e1db";
 }
 .icon-update:before {
   content: "\e923";
 }
 .icon-view_day:before {
   content: "\e8ed";
-}
-.icon-whatshot:before {
-  content: "\e80e";
 }
 
 
@@ -528,6 +519,18 @@ div {
 		&::-ms-input-placeholder { color: rgba(255, 255, 255, 0.8); }
 	}
 
+	.bm-menu-wrap {
+		background:#1b2836;
+	}
+
+	.bm-overlay { background: rgba(0, 0, 0, 0.6); }
+	.userHeroe { border-color: #101a25; }
+	.userHeroe__name { color: #fcfcfc; }
+	.userHeroe__bio { color: #7e8e9b; }
+	.userHeroe__website { color: #9db0bf; }
+	.menu__icon { color: #8596a3; }
+	.menu__text { color: #fafbfb; }
+
 	.list {
 		color: #fff !important;
 		background: #1d2835 !important;
@@ -544,7 +547,7 @@ div {
 	.notFound__icon { background: #526a86;}
 	.notFound__icon > span { color: rgba(255, 255, 255, 0.7); }
 	.notFound__text { color: rgba(255, 255, 255, 0.5); }
-	.notFound__button { border-color: rgba(255, 255, 255, 0.9); color: rgba(255, 255, 255, 0.9); }
+	.notFound__button { border-color: rgba(255, 255, 255, 0.4); color: rgba(255, 255, 255, 0.7); }
 
 	.card {
 		background: rgb(29, 40, 53) !important;
@@ -745,7 +748,7 @@ div {
 		text-decoration: none;
 		display: inline-block;
 		border: 2px solid #6040b0;
-		@include border-radius(5px);
+		@include border-radius(60px);
 	}
 }
 
@@ -754,6 +757,70 @@ div {
 		margin: 1em;
 		line-height: 22px;
 		color: rgba(0, 0, 0, 0.6);
+	}
+}
+
+.bm-item-list {
+	padding: 0;
+}
+
+.menu {
+	width: 100%;
+	a {
+		text-decoration: none;
+	}
+
+	&__icon {
+		margin-right: 1em;
+		margin-top: 3px;
+		color:rgba(0, 0, 0, .8);
+		span{
+			&:before {
+				font-size: 20px;
+			}
+		}
+	}
+
+	&__item {
+		width: calc(100% - 2em);
+		border-bottom: 0 solid #cecece;
+		padding: 0.8em 1em;
+		color:rgba(0, 0, 0, .95);
+		div {
+			font-size: 16px;
+		}
+	}
+}
+
+.userHeroe {
+	width: calc(100% - 2em);
+	padding: 1em 1em;
+	border-bottom: 1px solid #cecece;
+	&__pic {
+		background-color: #f3f3f3;
+		background-size: cover;
+		@include border-radius(60px);
+		margin-bottom: 0.7em;
+	}
+	&__name {
+		width: 100%;
+		font-size: 18px;
+		font-weight: 600;
+		color: #000;
+		margin-bottom: 0.3em;
+	}
+	&__bio {
+		width: 100%;
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.7);
+		margin-bottom: 0.5em;
+	}
+	&__website {
+		width: 100%;
+		color: blue;
+		font-size: 14px;
+		color: #6040b0;
+		text-decoration: none;
 	}
 }
 

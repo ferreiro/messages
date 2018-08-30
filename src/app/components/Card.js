@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDom from 'react-dom'
 import PropTypes from 'prop-types'
 import Hammer from 'react-hammerjs'
 
@@ -34,15 +33,13 @@ class Card extends Component {
 
 	componentDidMount () {
 		this.setState({ isFavorite: this.props.message.isFavorite })
-		this.resize()
+		// this.resize()
 	}
 
 	handleFavoriteMessage = () => {
 		const { message, onFavoriteMessage } = this.props
 		onFavoriteMessage(message)
-		this.setState((prevState, props) => ({
-			isFavorite: !prevState.isFavorite
-		}))
+		this.setState((prevState, props) => ({ isFavorite: !prevState.isFavorite }))
 	}
 
 	handleDeleteMessage = () => {
@@ -50,9 +47,12 @@ class Card extends Component {
 	}
 
 	resize = () => {
-		const { id } = this.props
-		const node = document.getElementById(id)
-		node && this.updateHeight(node.offsetHeight)
+		const { message } = this.props
+		const node = document.getElementById(message.id)
+		console.log(node)
+		if (node && node !== undefined) {
+			this.updateHeight(node.offsetHeight)
+		}
 	}
 
 	updateHeight = (height) => {
@@ -66,8 +66,16 @@ class Card extends Component {
 
 	removeCard = () => {
 		const { onRemoveMessage, message } = this.props
-		this.setState({ isHidden: true, height: 0 })
-		onRemoveMessage(message)
+
+		const node = document.getElementById(message.id)
+		if (node && node !== undefined) {
+			this.updateHeight(node.offsetHeight)
+		}
+
+		setTimeout(() => {
+			this.setState({ isHidden: true, height: 0 })
+			onRemoveMessage(message)
+		}, 0)
 	}
 
 	swipe = ({ opacity, positionX, className }, callback = () => {}) => {
@@ -132,8 +140,8 @@ class Card extends Component {
 	}
 
 	render () {
-		const { message, height, id, onFavoriteMessage } = this.props
-		const { isFavorite, positionX, opacity, isHidden, extraCardClassNames } = this.state
+		const { message } = this.props
+		const { height, isFavorite, positionX, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
 		const cardClassNames = 'card ' + extraCardClassNames

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function CardActionBar (props) {
-	const { actions, message } = props
+	const { actions } = props
 
 	return (
 		<ul className="card__options flex">

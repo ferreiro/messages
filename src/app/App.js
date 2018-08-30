@@ -65,15 +65,9 @@ class App extends Component {
   }
 
   removeMessage = (message) => {
-    console.log('.....')
-    console.log('removeMessage')
-    console.log(this.state)
-    const messageId = message.id
     this.setState(({ messages }, props) => ({
-      messages: messages.filter(m => m.id !== messageId) // ...messages.slice(0, index) , ...messages.slice(index + 1, messages.length)
-    }), () => {
-      console.log(this.state)
-    })
+      messages: messages.filter(m => m.id !== message.id) // ...messages.slice(0, index) , ...messages.slice(index + 1, messages.length)
+    }))
   }
 
   favoriteMessage = (message) => {

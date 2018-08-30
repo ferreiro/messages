@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import MenuItem from './MenuItem'
@@ -19,21 +18,21 @@ class Menu extends Component {
 					type: 'child',
 					linkUrl: '/',
 					label: 'Messages',
-					icon: 'favorite',
+					icon: 'icon-message',
 					extraAction: () => {}
 				},
 				{
 					type: 'child',
 					linkUrl: '/favorite',
 					label: 'Favorite',
-					icon: 'favorite',
+					icon: 'icon-star_border',
 					extraAction: () => {}
 				},
 				{
 					type: 'child',
 					linkUrl: '/settings',
 					label: 'Settings',
-					icon: 'settings',
+					icon: 'icon-settings',
 					extraAction: () => {}
 				}
 			]
@@ -63,19 +62,24 @@ class Menu extends Component {
 				isOpen={ isOpen }
 				onStateChange={ this.handleStateChange }
 			>
-				<div>
-					<div style={{
-						width: 80,
-						height: 80,
-						backgroundSize: 'cover', 
+				<div className='userHeroe'>
+					<div className='userHeroe__pic' style={{
+						width: 50,
+						height: 50,
 						backgroundImage: `url(${avatar})`
 					}}></div>
-					<span>{name}</span>
-					<span>{website}</span>
+					<div className='userHeroe__name'>{name}</div>
+					<div className='userHeroe__bio'>{bio}</div>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href='https://www.ferreiro.me/'
+						className='userHeroe__website'
+					>{website}</a>
 				</div>
 
 				{this.options.map(option => (
-					<div className='list'>
+					<div className='menu'>
 						{option.element}
 						{option.children.map(child => (
 							<MenuItem

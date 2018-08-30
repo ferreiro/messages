@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { slide as MenuSlide } from 'react-burger-menu'
-
 class Menu extends Component {
 	static propTypes = {
 		onUpdateMenuState: PropTypes.func.isRequired,
@@ -28,11 +26,11 @@ class Menu extends Component {
 
 		return (
 			<Link to={linkUrl} onClick={handleClick}>
-				<div className='list__item flex'>
-					<div className='flexbox'>
+				<div className='menu__item flex'>
+					<div className='menu__icon flexbox'>
 						<span className={'icon ' + icon}></span>
 					</div>
-					<div className='flexbox'>
+					<div className='menu__text flexbox__elastic'>
 						{label}
 					</div>
 				</div>
