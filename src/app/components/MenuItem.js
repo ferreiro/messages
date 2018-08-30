@@ -28,7 +28,7 @@ class Menu extends Component {
 
 		return (
 			<Link to={linkUrl} onClick={handleClick}>
-				<div className='flex'>
+				<div className='list__item flex'>
 					<div className='flexbox'>
 						<span className={'icon ' + icon}></span>
 					</div>

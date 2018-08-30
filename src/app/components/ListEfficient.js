@@ -21,13 +21,11 @@ const cache = new CellMeasurerCache({
   fixedHeight: false,
 })
 
-class InfiniteCardListPerformance extends Component {
+class ListEfficient extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
-    	loadLimit: PropTypes.number.isRequired,
-        onAddMessages: PropTypes.func.isCompactMode,
         onRemoveMessage: PropTypes.func.isCompactMode,
-        isInfiniteScrollActivated: PropTypes.bool.isRequired,
+        onFavoriteMessage: PropTypes.func.isCompactMode,
     }
 
 	state = {
@@ -37,13 +35,9 @@ class InfiniteCardListPerformance extends Component {
 		nextPageToken: null,
 	}
 
-    loadMoreElement = React.createRef()
-
 	componentDidMount () {
 		this.updateViewportWidth()
-		this.fetchItems()
 
-		window.addEventListener('scroll', this.handleScroll)
 		window.addEventListener('resize', this.handleResize)
 
 		// Readjust width
@@ -51,7 +45,6 @@ class InfiniteCardListPerformance extends Component {
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll)
 		window.removeEventListener('resize', this.handleResize)
 	}
 
@@ -68,64 +61,6 @@ class InfiniteCardListPerformance extends Component {
 	handleResize = () =>
 		this.updateViewportWidth()
 
-	handleScroll = () =>
-		this.loadMoreAutomatically()
-
-	loadMoreManually = (event) => {
-		event.preventDefault()
-		this.fetchItems()
-	}
-
-	loadMoreAutomatically = () => {
-		// const { loadMoreElement } = this
-		const { isInfiniteScrollActivated } = this.props
-		const { rowHeight } = this.state
-		const loadMoreElement = document.getElementById('moreMessagesTrigger')
-
-		if (!loadMoreElement) {
-			// throw new Error('No loadMore node')
-			return
-		}
-
-		const isVisible =
-			ScrollUtils.isElementInViewport({ element: loadMoreElement, offset: 12 * rowHeight })
-
-		if (isVisible && isInfiniteScrollActivated && isInfiniteScrollActivated === true) {
-			this.fetchItems()
-		}
-	}
-
-	fetchItems = () => {
-		const { isLoading, nextPageToken } = this.state
-		const { loadLimit, onAddMessages } = this.props
-		const fetchDataFromApi = () => {
-			return MessagesApi.get({
-				limit: loadLimit,
-				nextPageToken,
-			})
-		}
-
-		if (isLoading) {
-			return; // don't load
-		}
-
-		this.setState({ isLoading: true })
-		fetchDataFromApi()
-			.then(response => {
-				const { messages, pageToken, } = response
-				onAddMessages(messages, () => {
-					this.setState({
-						isLoading: false,
-						nextPageToken: pageToken
-					})
-				})
-			})
-			.catch(err => {
-				console.log(err)
-				this.setState({ isLoading: false })
-			})
-	}
-
 	rowRenderer = ({
 	  index,       // Index of row
 	  key,         // Unique key within array of rendered rows
@@ -135,13 +70,17 @@ class InfiniteCardListPerformance extends Component {
 	  isVisible,   // This row is visible within the List (eg it is not an overscanned row)
 	  parent,      // Reference to the parent List (instance)
 	}) => {
-		const { messages, onRemoveMessage, } = this.props
+		const { messages, onRemoveMessage, onFavoriteMessage } = this.props
 
 		if (!messages || messages.length === 0 || index >= messages.length) {
 			return (<div></div>)
 		}
 
 		const message = messages[index]
+		console.log('rowRenderer')
+		console.log(messages)
+		console.log(index)
+		console.log(message)
 
 		return (
 		    <CellMeasurer
@@ -154,12 +93,12 @@ class InfiniteCardListPerformance extends Component {
 				{({ height, width }) => (
 					<div>
 				      	<Card
-				      		autoHeight
 							key={key}
 							index={index}
 							height={height}
 							message={message}
 							style={style}
+							onFavoriteMessage={onFavoriteMessage}
 							onRemoveMessage={onRemoveMessage}
 						/>
 					</div>
@@ -169,7 +108,7 @@ class InfiniteCardListPerformance extends Component {
 	}
 
 	render () {
-		const { messages, isInfiniteScrollActivated } = this.props
+		const { messages, noItemsComponent, onRemoveMessage, onFavoriteMessage } = this.props
 		const { width, } = this.state
 
 	    const {
@@ -181,49 +120,30 @@ class InfiniteCardListPerformance extends Component {
 
 		      rowHeight,
 		      isLoading,
-		      bestEffortHeight,
 	    } = this.state;
 
 	    const totalWidth = Math.max(width, this.getViewportWidth())
 	    const rowCount = messages.length
 	  	const height = rowHeight * messages.length
 
-	  	{messages && messages.length < 5 ? this.fetchItems() : ''}
-
 		return (
 			<div style={{width: '100%'}}>
 		      	{messages.length === 0 && (
-		      		<PlaceholderCardList count={10} />
+		      		noItemsComponent
 	      		)}
 
-			    <List
-					width={width}
-					height={height}
-					rowHeight={rowHeight}
-					rowRenderer={this.rowRenderer}
-					rowCount={messages.length}
-					overscanRowCount={3}
-					deferredMeasurementCache={cache}
-		      	/>
-
-  				<div id='moreMessagesTrigger' ref={(element) => this.loadMoreElement = element}>
-			      	{isInfiniteScrollActivated === true
-			      		? (
-			      			<LoaderWithPlaceholders
-			      				placeholderHeight={130}
-			      				count={1}
-			      		  	/>
-			      		) : (
-			      			<LoaderWithButton
-			      				placeholderHeight={200}
-			      				onLoadMoreManually={this.loadMoreManually}
-			      			/>
-			      		)
-			      	}
-			    </div>
+	      		{messages.map(message => (
+			      	<Card
+						key={message.id}
+						height={'auto'}
+						message={message}
+						onFavoriteMessage={onFavoriteMessage}
+						onRemoveMessage={onRemoveMessage}
+					/>
+      			))}
 			</div>
 		)
 	}
 }
 
-export default InfiniteCardListPerformance
+export default ListEfficient

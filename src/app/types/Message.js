@@ -1,13 +1,15 @@
+const uniqid = require('uniqid')
+
 class Message {
 	constructor (data) {
 		Object.defineProperties(this, {
 			id: {
-				value: data.id,
+				value: uniqid(),
 				writable: false,
 			},
 
 			isFavorite: {
-				value: data.isFavorite,
+				value: data.isFavorite || false,
 				writable: true,
 			},
 
@@ -32,6 +34,13 @@ class Message {
 			}
 		})
 	}
+
+	toJSON() {
+	    return Object.getOwnPropertyNames(this).reduce((a, b) => {
+	      a[b] = this[b];
+	      return a;
+	    }, {})
+  }
 } 
 
 export default Message

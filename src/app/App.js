@@ -9,6 +9,7 @@ import Favorite from './views/Favorite'
 import Search from './views/Search'
 import Settings from './views/Settings'
 import NotFound from './views/NotFound'
+import Message from './types/Message'
 
 import * as MessagesApi from './libs/MessagesApi'
 import '../styles/css/index.css';
@@ -63,9 +64,30 @@ class App extends Component {
     })
   }
 
-  removeMessage = (index) => {
+  removeMessage = (message) => {
+    console.log('.....')
+    console.log('removeMessage')
+    console.log(this.state)
+    const messageId = message.id
     this.setState(({ messages }, props) => ({
-      messages: [...messages.slice(0, index) , ...messages.slice(index + 1, messages.length)]
+      messages: messages.filter(m => m.id !== messageId) // ...messages.slice(0, index) , ...messages.slice(index + 1, messages.length)
+    }), () => {
+      console.log(this.state)
+    })
+  }
+
+  favoriteMessage = (message) => {
+    const { messages } = this.state
+
+    const messageIndex = messages.findIndex((item) => item.id === message.id)
+    const data = Object.assign({}, message.toJSON(), { isFavorite: !message.isFavorite })
+
+    this.setState(({ messages }, props) => ({
+        messages: [
+            ...messages.slice(0, messageIndex), 
+            new Message(data),
+            ...messages.slice(messageIndex + 1)
+        ]
     }))
   }
 
@@ -154,6 +176,7 @@ class App extends Component {
                           isInfiniteScrollActivated={this.state.settings.infiniteScroll}
                           onAddMessages={this.addMessages}
                           onRemoveMessage={this.removeMessage}
+                          onFavoriteMessage={this.favoriteMessage}
                       />
                   )}
               ></Route>
@@ -162,11 +185,10 @@ class App extends Component {
                   exact
                   render={() => (
                       <Favorite
-                          messages={messages}
+                          messages={messages.filter(message => message.isFavorite === true)}
                           onOpenMenu={this.openMenu}
-                          isInfiniteScrollActivated={this.state.settings.infiniteScroll}
-                          onAddMessages={this.addMessages}
                           onRemoveMessage={this.removeMessage}
+                          onFavoriteMessage={this.favoriteMessage}
                       />
                   )}
               ></Route>
@@ -191,7 +213,6 @@ class App extends Component {
 
                     return (
                       <div>
-                        {console.log(this.state)}
                         <Settings
                             onGoBack={goBack}
                             settings={this.state.settings}

@@ -75,7 +75,7 @@ class Menu extends Component {
 				</div>
 
 				{this.options.map(option => (
-					<div>
+					<div className='list'>
 						{option.element}
 						{option.children.map(child => (
 							<MenuItem

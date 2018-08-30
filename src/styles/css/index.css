@@ -366,6 +366,10 @@ div {
 .night .notFound__text {
   color: rgba(255, 255, 255, 0.5);
 }
+.night .notFound__button {
+  border-color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
+}
 .night .card {
   background: #1d2835 !important;
   border-bottom: #293646 !important;
@@ -381,6 +385,14 @@ div {
 }
 .night .card .card__avatar {
   background-color: #40556d;
+}
+.night .card .card__options__item {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(19, 74, 117, 0.4);
+}
+.night .card .card__options__item__selected {
+  background: rgba(19, 74, 117, 0.2);
+  color: rgba(255, 255, 255, 0.8);
 }
 .night .placeholder__line,
 .night .placeholder__message {
@@ -519,6 +531,7 @@ div {
   top: 50%;
   left: 50%;
   position: absolute;
+  text-align: center;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -527,6 +540,7 @@ div {
 .notFound__icon {
   width: 90px;
   height: 90px;
+  margin: 0 auto;
   background: #d6d6d6;
   position: relative;
   -webkit-border-radius: 60px;
@@ -551,6 +565,21 @@ div {
   font-size: 18px;
   margin-top: 1em;
   color: rgba(0, 0, 0, 0.6);
+}
+.notFound__button {
+  color: #6040b0;
+  font-size: 14px;
+  margin-top: 2em;
+  padding: 0.5em 1.2em;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid #6040b0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 .list {
@@ -682,6 +711,28 @@ div {
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+}
+.card__options {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.card__options__item {
+  padding: 0.5em 0.7em;
+  border: 1px solid #cecece;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.card__options__item__selected {
+  background: rgba(96, 64, 176, 0.05);
+}
+.card__options__text {
+  margin-right: 0.1em;
 }
 
 /* The switch - the box around the slider */

@@ -544,6 +544,7 @@ div {
 	.notFound__icon { background: #526a86;}
 	.notFound__icon > span { color: rgba(255, 255, 255, 0.7); }
 	.notFound__text { color: rgba(255, 255, 255, 0.5); }
+	.notFound__button { border-color: rgba(255, 255, 255, 0.9); color: rgba(255, 255, 255, 0.9); }
 
 	.card {
 		background: rgb(29, 40, 53) !important;
@@ -552,8 +553,14 @@ div {
 		.card__date { color: rgb(128, 142, 145); }
 		.card__author { color: #fff; }
 		.card__message { color: #fff; }
-		.card__avatar {
-			background-color: #40556d;
+		.card__avatar { background-color: #40556d; }
+		.card__options__item {
+			color: rgba(255, 255, 255, 0.5);
+		    border-color: rgba(19, 74, 117, 0.4);
+		}
+		.card__options__item__selected {
+		    background: rgba(19, 74, 117, 0.2);
+		    color: rgba(255, 255, 255, 0.8);
 		}
 	}
 
@@ -693,6 +700,7 @@ div {
 		top: 50%;
 		left: 50%;
 		position: absolute;
+		text-align: center;
 
 		@include translate(-50%, -50%);
 	}
@@ -700,6 +708,7 @@ div {
 	&__icon {
 		width: 90px;
 		height: 90px;
+		margin: 0 auto;
 		background: #d6d6d6;
 		position: relative;
 		@include border-radius(60px);
@@ -719,6 +728,17 @@ div {
 		font-size: 18px;
 		margin-top: 1em;
 		color: rgba(0, 0, 0, 0.6);
+	}
+
+	&__button {
+		color: #6040b0;
+		font-size: 14px;
+		margin-top: 2em;
+		padding: 0.5em 1.2em;
+		text-decoration: none;
+		display: inline-block;
+		border: 2px solid #6040b0;
+		@include border-radius(5px);
 	}
 }
 
@@ -848,6 +868,31 @@ div {
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 18px;
+	}
+
+	&__options {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+
+
+		&__item {
+			padding: 0.5em 0.7em;
+			border: 1px solid #cecece;
+			@include border-radius(60px);
+
+			&__selected {
+			    background: rgba(96, 64, 176, 0.05);
+			}
+		}
+		&__icon {
+			// margin-right: 0.3em;
+		}
+		&__text {
+			margin-right: 0.1em;
+		}
 	}
 
 }

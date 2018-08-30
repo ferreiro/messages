@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import InfiniteCardListPerformance from '../components/InfiniteCardListPerformance'
+import InfiniteCardList from '../components/InfiniteCardList'
 import Header from '../components/Header'
 
 class Home extends Component {
@@ -10,6 +10,7 @@ class Home extends Component {
         onOpenMenu: PropTypes.func.isRequired,
         onAddMessages: PropTypes.func.isRequired,
         onRemoveMessage: PropTypes.func.isRequired,
+        onFavoriteMessage: PropTypes.func.isRequired,
         isInfiniteScrollActivated: PropTypes.bool.isRequired,
     }
 
@@ -19,6 +20,7 @@ class Home extends Component {
             onOpenMenu,
         	onAddMessages,
             onRemoveMessage,
+            onFavoriteMessage,
             isInfiniteScrollActivated
         } = this.props
 
@@ -31,12 +33,13 @@ class Home extends Component {
 
 		        <div className='container'>
 		        	<div className='container__wrapper'>
-                        <InfiniteCardListPerformance
+                        <InfiniteCardList
                             loadLimit={20}
                             messages={messages}
                             isInfiniteScrollActivated={isInfiniteScrollActivated}
                             onAddMessages={onAddMessages}
                             onRemoveMessage={onRemoveMessage}
+                            onFavoriteMessage={onFavoriteMessage}
                         />
 		          	</div>
 		        </div>

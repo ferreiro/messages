@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import InfiniteCardListPerformance from '../components/InfiniteCardListPerformance'
+import ListEfficient from '../components/ListEfficient'
 import Header from '../components/Header'
 
 class Favorite extends Component {
     static propTypes = {
         messages: PropTypes.array.isRequired,
         onOpenMenu: PropTypes.func.isRequired,
-        onAddMessages: PropTypes.func.isRequired,
         onRemoveMessage: PropTypes.func.isRequired,
-        isInfiniteScrollActivated: PropTypes.bool.isRequired,
+        onFavoriteMessage: PropTypes.func.isRequired,
     }
 
     render () {
         const {
         	messages,
             onOpenMenu,
-        	onAddMessages,
             onRemoveMessage,
-            isInfiniteScrollActivated
+            onFavoriteMessage,
         } = this.props
 
         return (
@@ -31,12 +30,24 @@ class Favorite extends Component {
 
 		        <div className='container'>
 		        	<div className='container__wrapper'>
-                        <InfiniteCardListPerformance
-                            loadLimit={20}
+                        <ListEfficient
                             messages={messages}
-                            isInfiniteScrollActivated={isInfiniteScrollActivated}
-                            onAddMessages={onAddMessages}
                             onRemoveMessage={onRemoveMessage}
+                            onFavoriteMessage={onFavoriteMessage}
+                            noItemsComponent={(
+                                <div className="notFound">
+                                    <div className="notFound__wrapper">
+                                        <div className="notFound__icon">
+                                            <span className="icon icon-star_border"></span>
+                                        </div>
+                                        <div className="notFound__text">No favorites yet!</div>
+                                        <Link
+                                            to='/'
+                                            className="notFound__button"
+                                        >Star now!</Link>
+                                    </div>
+                                </div>
+                            )}
                         />
 		          	</div>
 		        </div>

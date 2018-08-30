@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import ReactDom from 'react-dom'
 import PropTypes from 'prop-types'
 import Hammer from 'react-hammerjs'
 
+import CardActionBar from './CardActionBar'
 import CardAvatar from './CardAvatar'
 import CardAuthor from './CardAuthor'
 import CardDate from './CardDate'
@@ -15,19 +17,36 @@ class Card extends Component {
 		index: PropTypes.number.isRequired,
 		height: PropTypes.number,
 		message: PropTypes.object.isRequired,
-		onRemoveMessage: PropTypes.func.isCompactMode,
+		onRemoveMessage: PropTypes.func.isRequired,
+		onFavoriteMessage: PropTypes.func.isRequired,
 	}
 
 	state = {
 		height: 'auto',
 		isHidden: false,
+		isFavorite: false,
 		opacity: 1,
 		positionX: 0,
 		extraCardClassNames: ''
 	}
 
+	cardNode = new React.createRef()
+
 	componentDidMount () {
+		this.setState({ isFavorite: this.props.message.isFavorite })
 		this.resize()
+	}
+
+	handleFavoriteMessage = () => {
+		const { message, onFavoriteMessage } = this.props
+		onFavoriteMessage(message)
+		this.setState((prevState, props) => ({
+			isFavorite: !prevState.isFavorite
+		}))
+	}
+
+	handleDeleteMessage = () => {
+		this.removeCard()
 	}
 
 	resize = () => {
@@ -46,9 +65,9 @@ class Card extends Component {
 	}
 
 	removeCard = () => {
-		const { onRemoveMessage, index } = this.props
-		onRemoveMessage(index)
+		const { onRemoveMessage, message } = this.props
 		this.setState({ isHidden: true, height: 0 })
+		onRemoveMessage(message)
 	}
 
 	swipe = ({ opacity, positionX, className }, callback = () => {}) => {
@@ -113,14 +132,19 @@ class Card extends Component {
 	}
 
 	render () {
-		const { message, height, id } = this.props
-		const { positionX, opacity, isHidden, extraCardClassNames } = this.state
+		const { message, height, id, onFavoriteMessage } = this.props
+		const { isFavorite, positionX, opacity, isHidden, extraCardClassNames } = this.state
 		const { handleSwipe, handlePan } = this
 
 		const cardClassNames = 'card ' + extraCardClassNames
 
+		const favoriteIcon = isFavorite === true
+			? 'icon-star'
+			: 'icon-star_border'
+
 		return (
 			<div
+				ref={this.cardNode}
 				className={'card__wrapper ' + (isHidden ? 'hide' : '')}
 				style={{ height }}
 			>
@@ -130,24 +154,37 @@ class Card extends Component {
 					direction='DIRECTION_HORIZONTAL'
 				>
 					<div
-						id={id}
+						id={message.id}
 						className={cardClassNames}
 						style={{
 							position: 'relative',
 							'transform': `translateX(${positionX}px) translateY(0)`,
 							opacity
 						}}
-					>
-						<div className='card__header'>
+					>	
+						<div className='flex card__header'>
 							<CardAvatar
 								avatarUrl={message.avatarUrl}
 							/>
-							<div className='card__header__group'>
+							<div className='flexbox__elastic card__header__group'>
 								<CardAuthor
 									authorName={message.authorName}
 								/>
 								<CardDate
 									updated={message.updated}
+								/>
+							</div>
+							<div className='flexbox'>
+								<CardActionBar
+									actions={[
+										{
+											type: 'action',
+											label: 'Favorite',
+											icon: favoriteIcon,
+											isSelected: isFavorite,
+											executeAction: this.handleFavoriteMessage
+										},
+									]}
 								/>
 							</div>
 						</div>
@@ -161,6 +198,15 @@ class Card extends Component {
  	}
 }
 
+/*
+{
+	type: 'action',
+	label: 'Delete',
+	icon: 'icon-delete',
+	isSelected: false,
+	executeAction: this.handleDeleteMessage
+}
+*/
 /*
 	Options for the card in the background
 
