@@ -128,7 +128,8 @@ class InfiniteCardList extends Component {
 						title: 'Error loading the data',
 						message: 'Hi! We had an error while processing your request and we\'ll'
 								+ 'try in a few seconds again. If the error persist, please'
-								+ ' reach out to me: jorge@ferreiro.me',
+								+ ' reach out to me: jorge@ferreiro.me'
+								+ err,
 						buttons: [
 						    {
 						      label: 'Retry, thanks!',

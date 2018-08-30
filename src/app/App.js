@@ -28,7 +28,7 @@ class App extends Component {
       avatar: '/photos/jorge_ferreiro.jpg',
     },
     settings: {
-      nightMode: true,
+      nightMode: false,
       compactMode: true,
       infiniteScroll: true,
     }
