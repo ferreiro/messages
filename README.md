@@ -3,8 +3,8 @@
 Welcome to React messages, My first React.JS app! It has infinite scrolling messages, Search, UI light/dark mode, starred messages and extra settings options.
 
 ## Live Example
-- [https://messages-ui.herokuapp.com](https://messages-ui.herokuapp.com)
-- Video: [https://www.youtube.com/watch?v=lZVSD5FcGkE&t=1s](YouTube Demo)
+- [Heroku App](https://messages-ui.herokuapp.com)
+- [YouTube Demo](https://www.youtube.com/watch?v=lZVSD5FcGkE)
 
 ## Product overview
 
