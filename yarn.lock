@@ -1450,7 +1450,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.1.1, classnames@^2.2.3:
+classnames@^2.2.3, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -5701,14 +5701,14 @@ react-addons-css-transition-group@^15.6.2:
   dependencies:
     react-transition-group "^1.2.0"
 
-react-burger-menu@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.5.2.tgz#2be34466b51af80213591859654803bd07342fb4"
+react-burger-menu@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.6.5.tgz#efe567966ae95717be25c052745109e375915c37"
   dependencies:
     browserify-optional "^1.0.0"
-    classnames "^2.1.1"
+    classnames "^2.2.6"
     eve "~0.5.1"
-    prop-types "^15.6.1"
+    prop-types "^15.6.2"
     snapsvg-cjs "0.0.6"
 
 react-confirm-alert@^2.0.5:
