@@ -5722,9 +5722,9 @@ react-burger-menu@^2.6.5:
     prop-types "^15.6.2"
     snapsvg-cjs "0.0.6"
 
-react-confirm-alert@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.2.0.tgz#c79ec390051694168427c9bfe4da3d1d284b1929"
+react-confirm-alert@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.3.0.tgz#c8a7282f06855235315840b72ed13374448161eb"
 
 react-dev-utils@^5.0.2:
   version "5.0.2"
