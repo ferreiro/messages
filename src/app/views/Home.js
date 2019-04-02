@@ -16,9 +16,9 @@ class Home extends Component {
 
     render () {
         const {
-        	messages,
+            messages,
             onOpenMenu,
-        	onAddMessages,
+            onAddMessages,
             onRemoveMessage,
             onFavoriteMessage,
             isInfiniteScrollActivated
@@ -33,14 +33,14 @@ class Home extends Component {
 
 		        <div className='container'>
 		        	<div className='container__wrapper'>
-                        <InfiniteCardList
-                            loadLimit={20}
-                            messages={messages}
-                            isInfiniteScrollActivated={isInfiniteScrollActivated}
-                            onAddMessages={onAddMessages}
-                            onRemoveMessage={onRemoveMessage}
-                            onFavoriteMessage={onFavoriteMessage}
-                        />
+					<InfiniteCardList
+					    loadLimit={20}
+					    messages={messages}
+					    isInfiniteScrollActivated={isInfiniteScrollActivated}
+					    onAddMessages={onAddMessages}
+					    onRemoveMessage={onRemoveMessage}
+					    onFavoriteMessage={onFavoriteMessage}
+					/>
 		          	</div>
 		        </div>
 	        </div>
