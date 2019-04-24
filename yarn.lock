@@ -5712,14 +5712,14 @@ react-addons-css-transition-group@^15.6.2:
   dependencies:
     react-transition-group "^1.2.0"
 
-react-burger-menu@^2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.6.5.tgz#efe567966ae95717be25c052745109e375915c37"
+react-burger-menu@^2.6.10:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.6.10.tgz#29bebd0f81f7aa3da9c2395038b0139a95908388"
   dependencies:
     browserify-optional "^1.0.0"
     classnames "^2.2.6"
     eve "~0.5.1"
-    prop-types "^15.6.2"
+    prop-types "^15.7.2"
     snapsvg-cjs "0.0.6"
 
 react-confirm-alert@^2.3.0:
