@@ -5667,9 +5667,9 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
-random-js@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/random-js/-/random-js-1.0.8.tgz#968fd689a6f25d6c0aac766283de2f688c9c190a"
+random-js@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/random-js/-/random-js-2.1.0.tgz#0c03238b0a4f701f7a4c7303036ade3083d8ee14"
 
 randomatic@^3.0.0:
   version "3.1.0"
