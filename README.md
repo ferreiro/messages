@@ -1,6 +1,8 @@
-# React messages
+# ⚛️ React messages app
 
-Welcome to React messages, My first React.JS app! It has infinite scrolling messages, Search, UI light/dark mode, starred messages and extra settings options.
+Welcome to React messages, my first React app!
+
+React messages is a simple app to list and manage quotes from famous people. It has infinite scrolling messages, Search, UI light/dark mode, starred messages and extra settings options.
 
 ## Live Example
 - [Heroku App](https://messages-ui.herokuapp.com)
