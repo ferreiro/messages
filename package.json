@@ -10,7 +10,7 @@
     "random-js": "^1.0.8",
     "react": "^16.8.2",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-burger-menu": "^2.6.11",
+    "react-burger-menu": "^2.8.0",
     "react-confirm-alert": "^2.4.1",
     "react-dom": "^16.8.6",
     "react-hammerjs": "^1.0.1",
