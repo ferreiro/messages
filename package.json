@@ -18,7 +18,7 @@
     "react-infinite": "^0.13.0",
     "react-router-dom": "^4.3.1",
     "react-router-page-transition": "^3.1.0",
-    "react-scripts": "1.1.5",
+    "react-scripts": "4.0.1",
     "react-virtualized": "^9.21.1",
     "timeago.js": "^3.0.2",
     "uniqid": "^5.0.3"
