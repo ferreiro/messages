@@ -5720,9 +5720,9 @@ react-addons-css-transition-group@^15.6.2:
   dependencies:
     react-transition-group "^1.2.0"
 
-react-burger-menu@^2.6.11:
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-2.6.11.tgz#e9ec8db2ea156ef9366423be971ae6859ea17570"
+react-burger-menu@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-burger-menu/-/react-burger-menu-3.0.3.tgz#be1268423b7a4a21d99243ae63842e480a5ba70b"
   dependencies:
     browserify-optional "^1.0.0"
     classnames "^2.2.6"
